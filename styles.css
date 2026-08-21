@@ -203,9 +203,9 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
   width: max-content;
   max-width: 170px;
   padding: 8px 12px 7px;
-  color: #2a1608;
+  color: #0a0400;
   border-radius: 7px;
-  background: #ffe8a0;
+  background: #ffbb00;
   box-shadow: 0 8px 24px rgba(48, 27, 13, .38);
   font-family: var(--font-hand);
   font-size: .82rem;
@@ -224,7 +224,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
   width: 0;
   height: 0;
   border: 5px solid transparent;
-  border-top-color: #ffe8a0;
+  border-top-color: #ffbb00;
   content: "";
   transform: translateX(-50%);
 }
