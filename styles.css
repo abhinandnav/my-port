@@ -202,13 +202,14 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
   bottom: calc(100% + 9px);
   width: max-content;
   max-width: 170px;
-  padding: 7px 10px 6px;
-  color: #4b311f;
+  padding: 8px 12px 7px;
+  color: #2a1608;
   border-radius: 7px;
-  background: #fff4d8;
-  box-shadow: 0 8px 24px rgba(48, 27, 13, .24);
+  background: #ffe8a0;
+  box-shadow: 0 8px 24px rgba(48, 27, 13, .38);
   font-family: var(--font-hand);
-  font-size: .72rem;
+  font-size: .82rem;
+  font-weight: 700;
   line-height: 1;
   pointer-events: none;
   opacity: 0;
@@ -223,7 +224,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
   width: 0;
   height: 0;
   border: 5px solid transparent;
-  border-top-color: #fff4d8;
+  border-top-color: #ffe8a0;
   content: "";
   transform: translateX(-50%);
 }

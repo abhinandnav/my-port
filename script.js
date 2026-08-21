@@ -268,18 +268,7 @@ galleryFigure.addEventListener("pointerup", (event) => {
 
 galleryFigure.addEventListener("pointercancel", () => { pointerStart = null; });
 
-dogButton.addEventListener("click", () => {
-  const waking = !dogButton.classList.contains("is-awake");
-  window.clearTimeout(dogWakeTimer);
-  dogButton.classList.toggle("is-awake", waking);
-  dogButton.setAttribute("aria-pressed", String(waking));
-  if (waking) {
-    dogWakeTimer = window.setTimeout(() => {
-      dogButton.classList.remove("is-awake");
-      dogButton.setAttribute("aria-pressed", "false");
-    }, 2800);
-  }
-});
+
 
 caseScroll.addEventListener("scroll", () => {
   const available = caseScroll.scrollHeight - caseScroll.clientHeight;
