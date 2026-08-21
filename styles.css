@@ -11,9 +11,9 @@
   --green: #315843;
   --line: rgba(63, 42, 26, .15);
   --shadow: 0 24px 80px rgba(35, 21, 10, .28);
-  --font-display: "Segoe Print", "Bradley Hand", cursive;
-  --font-body: "Segoe Print", "Bradley Hand", cursive;
-  --font-hand: "Segoe Print", "Bradley Hand", cursive;
+  --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-body:    'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-hand:    'Inter', ui-sans-serif, system-ui, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -571,7 +571,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
 .reading-progress { position:absolute; right:0; bottom:-1px; left:0; height:3px; overflow:hidden; }
 .reading-progress i { display:block; width:var(--progress,0%); height:100%; background:var(--terracotta); transition:width .1s linear; }
 .case-scroll { min-height:0; overflow-y:auto; background:#fffaf0; scroll-behavior:smooth; scrollbar-color:#b98966 #f0e5d5; }
-/* ── Case-study typography: serious & trustworthy, scoped strictly ── */
+/* ── Case-study typography: clean & professional, scoped strictly ── */
 .case-study,
 .case-study p,
 .case-study li,
@@ -589,29 +589,30 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
    existing rules (e.g. .case-hero h1, .story-section h2) that
    use var(--font-display) automatically pick up the correct font */
 .case-study {
-  --font-display: 'Playfair Display', Georgia, serif;
+  --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-body:    'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-hand:    'Inter', ui-sans-serif, system-ui, sans-serif;
 }
 
 .case-study h1 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 700;
-  line-height: .85;
-  letter-spacing: -.03em;
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  line-height: .95;
+  letter-spacing: -.04em;
 }
 
 .case-study h2 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
   font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -.025em;
+  line-height: 1.1;
+  letter-spacing: -.03em;
 }
 
 .case-study h3 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 500;
-  line-height: 1.2;
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -.015em;
 }
 
 .case-study .eyebrow {
