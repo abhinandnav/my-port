@@ -337,9 +337,9 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
 
 /* Modal foundations */
 .modal {
-  width: auto;
+  width: 100vw;
   max-width: none;
-  height: auto;
+  height: 100svh;
   max-height: none;
   margin: auto;
   padding: 0;
@@ -347,6 +347,9 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
   border: 0;
   background: transparent;
   overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal::backdrop {
