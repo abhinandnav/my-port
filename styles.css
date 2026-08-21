@@ -309,55 +309,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
   cursor: pointer;
 }
 
-.dog-eye {
-  position: absolute;
-  top: 35.5%;
-  width: 4.4%;
-  height: 4.4%;
-  overflow: hidden;
-  border: 1.5px solid #c07a38;
-  border-radius: 50%;
-  /* Warm amber iris — friendly, not horror */
-  background: radial-gradient(circle at 40% 38%, #fde8a0 0%, #f4b84a 40%, #c97a1a 100%);
-  box-shadow: inset 0 -1px 3px rgba(140, 70, 10, .22), 0 1px 4px rgba(100, 55, 10, .18);
-  opacity: 0;
-  transform: scaleY(.06);
-  transition: opacity .2s ease, transform .28s cubic-bezier(.34,1.3,.64,1);
-}
 
-/* Pupil */
-.dog-eye::after {
-  position: absolute;
-  top: 28%;
-  left: 34%;
-  width: 32%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  /* Deep warm brown pupil */
-  background: radial-gradient(circle at 35% 30%, #6b3a18, #1e0f06);
-  /* Two cute catchlights */
-  box-shadow: 2px -2px 0 1px rgba(255,255,255,.82), -1px 2px 0 rgba(255,255,255,.28);
-  content: "";
-  animation: dog-gaze 3.2s ease-in-out .55s infinite alternate;
-}
-
-.dog-eye--left { left: 21.4%; rotate:9deg; }
-.dog-eye--right { left: 32.9%; rotate:-9deg; }
-
-.dog-hotspot:hover .dog-eye,
-.dog-hotspot:focus-visible .dog-eye,
-.dog-hotspot.is-awake .dog-eye {
-  opacity: 1;
-  animation: dog-wake .9s cubic-bezier(.34,1.28,.64,1) both;
-}
-
-.dog-hotspot:hover .dog-eye--left,
-.dog-hotspot:focus-visible .dog-eye--left,
-.dog-hotspot.is-awake .dog-eye--left { transform:scaleY(1); }
-
-.dog-hotspot:hover .dog-eye--right,
-.dog-hotspot:focus-visible .dog-eye--right,
-.dog-hotspot.is-awake .dog-eye--right { transform:scaleY(1); }
 
 .dog-label {
   position: absolute;
@@ -380,22 +332,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
 .dog-hotspot:focus-visible .dog-label,
 .dog-hotspot.is-awake .dog-label { opacity: 1; transform: translate(-50%, 0) rotate(-2deg); }
 
-/* Gentle blink-open: squint → open → tiny bounce → settled */
-@keyframes dog-wake {
-  0%   { opacity: 0; transform: scaleY(.06); }
-  30%  { opacity: 1; transform: scaleY(1.1); }
-  48%  { transform: scaleY(.55); }   /* soft half-blink */
-  68%  { transform: scaleY(1.05); }
-  85%, 100% { opacity: 1; transform: scaleY(1); }
-}
 
-/* Gentle left-right eye wander */
-@keyframes dog-gaze {
-  0%   { transform: translate(-1px, 0); }
-  35%  { transform: translate(1.5px, .5px); }
-  65%  { transform: translate(.5px, -.5px); }
-  100% { transform: translate(-1px, 0); }
-}
 
 /* Modal foundations */
 .modal {
