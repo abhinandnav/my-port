@@ -75,7 +75,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
   background: #9f5a29;
   box-shadow: 0 28px 90px rgba(0, 0, 0, .36);
   transform: scale(1.18);
-  transform-origin: center 60%;
+  transform-origin: center 35%;
 }
 
 .scene-art {
