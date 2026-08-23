@@ -372,6 +372,7 @@ a:focus-visible,
   border-radius: 46% 48% 38% 42%;
   background: transparent;
   cursor: pointer;
+  overflow: visible;
 }
 
 /* ── Interactive Whiteboard (window sill) ── */
@@ -521,10 +522,7 @@ a:focus-visible,
    DOG EYE ANIMATION
    ========================================= */
 
-.dog-hotspot {
-  position: relative;
-  overflow: visible;
-}
+
 
 
 /* -----------------------------------------
@@ -621,14 +619,20 @@ a:focus-visible,
    ----------------------------------------- */
 
 .dog-label {
+  position: absolute;
+  top: 4%;
+  left: 42%;
+  width: max-content;
+  padding: 7px 10px;
+  color: #5a371f;
+  border-radius: 8px;
+  background: #fff1c9;
+  box-shadow: 0 7px 20px rgba(68, 36, 16, .18);
+  font-family: var(--font-hand);
+  font-size: clamp(.56rem, .7vw, .74rem);
   opacity: 0;
-
-  transform:
-    translate(-50%, 6px) rotate(-2deg);
-
-  transition:
-    opacity 0.25s ease,
-    transform 0.3s ease;
+  transform: translate(-50%, 6px) rotate(-2deg);
+  transition: opacity 0.25s ease, transform 0.3s ease;
 }
 
 
