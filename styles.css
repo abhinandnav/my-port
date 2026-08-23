@@ -522,9 +522,7 @@ a:focus-visible,
    DOG EYE ANIMATION
    ========================================= */
 
-.dog-hotspot {
-  position: relative;
-}
+
 
 
 /* =========================================
@@ -533,8 +531,6 @@ a:focus-visible,
 
 .dog-awake-img {
   position: absolute;
-
-  /* Keep awake image aligned with base dog */
   left: 0;
   top: 0;
 
@@ -546,23 +542,8 @@ a:focus-visible,
 
   pointer-events: none;
 
-  /*
-     Hidden by default.
-     The closed-eye dog remains visible underneath.
-  */
   opacity: 0;
 
-  /*
-     IMPORTANT:
-
-     Your awake image is a FULL dog image.
-     We only reveal the upper part containing
-     the eyes.
-
-     18% from top
-     62% from bottom
-     = 20% visible area
-  */
   clip-path: inset(18% 0 62% 0);
 
   z-index: 2;
@@ -570,110 +551,39 @@ a:focus-visible,
   transition: opacity 0.15s ease;
 }
 
-
-/* =========================================
-   HOVER → OPEN EYES
-   ========================================= */
-
 .dog-hotspot:hover .dog-awake-img,
 .dog-hotspot:focus-visible .dog-awake-img,
 .dog-hotspot.is-awake .dog-awake-img {
   opacity: 1;
-}
-
-
-/* =========================================
-   NATURAL BLINK
-   ========================================= */
-
-.dog-hotspot:hover .dog-awake-img,
-.dog-hotspot:focus-visible .dog-awake-img,
-.dog-hotspot.is-awake .dog-awake-img {
   animation: dogBlink 3s ease-in-out infinite;
 }
 
-
 @keyframes dogBlink {
 
-  /* Closed */
   0% {
     opacity: 0;
   }
 
-  /* Open */
   12% {
     opacity: 1;
   }
 
-  /* Stay awake */
   72% {
     opacity: 1;
   }
 
-  /* Blink closed */
   77% {
     opacity: 0;
   }
 
-  /* Open again */
   83% {
     opacity: 1;
   }
 
-  /* Stay open */
   100% {
     opacity: 1;
   }
 }
-
-
-/* =========================================
-   DOG LABEL
-   ========================================= */
-
-.dog-label {
-  position: absolute;
-
-  top: 4%;
-  left: 42%;
-
-  width: max-content;
-
-  padding: 7px 10px;
-
-  color: #5a371f;
-
-  border-radius: 8px;
-
-  background: #fff1c9;
-
-  box-shadow:
-    0 7px 20px rgba(68, 36, 16, .18);
-
-  font-family: var(--font-hand);
-
-  font-size: clamp(.56rem, .7vw, .74rem);
-
-  opacity: 0;
-
-  transform:
-    translate(-50%, 6px) rotate(-2deg);
-
-  transition:
-    opacity 0.25s ease,
-    transform 0.3s ease;
-}
-
-
-.dog-hotspot:hover .dog-label,
-.dog-hotspot:focus-visible .dog-label,
-.dog-hotspot.is-awake .dog-label {
-  opacity: 1;
-
-  transform:
-    translate(-50%, 0) rotate(-2deg);
-}
-
 
 /* =========================================
    ACCESSIBILITY
