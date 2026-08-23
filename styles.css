@@ -429,6 +429,80 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
 /* ── End Whiteboard ── */
 
 
+/* =========================================
+   DOG EYE ANIMATION
+   ========================================= */
+
+/* -----------------------------------------
+   OPEN-EYE IMAGE
+   ----------------------------------------- */
+
+.dog-awake-img {
+  position: absolute;
+
+  /* Keep both dog images in exactly
+     the same coordinate system */
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: center bottom;
+
+  pointer-events: none;
+
+  /* Hidden when the dog is resting */
+  opacity: 0;
+
+  /* Only show the upper/eye portion
+     of the awake image */
+  clip-path: inset(15% 0 70% 0);
+
+  z-index: 2;
+
+  transition: opacity 0.15s ease;
+}
+
+
+/* -----------------------------------------
+   HOVER → DOG WAKES UP
+   ----------------------------------------- */
+
+.dog-hotspot:hover .dog-awake-img,
+.dog-hotspot:focus-visible .dog-awake-img,
+.dog-hotspot.is-awake .dog-awake-img {
+  animation: dogBlink 3s ease-in-out infinite;
+}
+
+
+@keyframes dogBlink {
+
+  /* Eyes closed */
+  0%   { opacity: 0; }
+
+  /* Eyes open */
+  10%  { opacity: 1; }
+
+  /* Stay awake */
+  72%  { opacity: 1; }
+
+  /* Blink */
+  77%  { opacity: 0; }
+
+  /* Eyes open again */
+  83%  { opacity: 1; }
+
+  /* Stay open */
+  100% { opacity: 1; }
+}
+
+
+/* -----------------------------------------
+   LABEL
+   ----------------------------------------- */
+
 .dog-label {
   position: absolute;
   top: 4%;
@@ -442,15 +516,31 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
   font-family: var(--font-hand);
   font-size: clamp(.56rem, .7vw, .74rem);
   opacity: 0;
-  transform: translate(-50%, 5px) rotate(-2deg);
-  transition: opacity .2s ease, transform .2s ease;
+  transform: translate(-50%, 6px) rotate(-2deg);
+  transition: opacity 0.25s ease, transform 0.3s ease;
 }
-
-
 
 .dog-hotspot:hover .dog-label,
 .dog-hotspot:focus-visible .dog-label,
-.dog-hotspot.is-awake .dog-label { opacity: 1; transform: translate(-50%, 0) rotate(-2deg); }
+.dog-hotspot.is-awake .dog-label {
+  opacity: 1;
+  transform: translate(-50%, 0) rotate(-2deg);
+}
+
+
+/* -----------------------------------------
+   ACCESSIBILITY
+   ----------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .dog-hotspot:hover .dog-awake-img,
+  .dog-hotspot:focus-visible .dog-awake-img,
+  .dog-hotspot.is-awake .dog-awake-img {
+    animation: none;
+    opacity: 1;
+  }
+}
+
 
 
 
