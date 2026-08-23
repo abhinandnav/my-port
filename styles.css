@@ -522,18 +522,19 @@ a:focus-visible,
    DOG EYE ANIMATION
    ========================================= */
 
+.dog-hotspot {
+  position: relative;
+}
 
 
-
-/* -----------------------------------------
-   OPEN-EYE IMAGE
-   ----------------------------------------- */
+/* =========================================
+   OPEN EYE IMAGE
+   ========================================= */
 
 .dog-awake-img {
   position: absolute;
 
-  /* Keep both dog images in exactly
-     the same coordinate system */
+  /* Keep awake image aligned with base dog */
   left: 0;
   top: 0;
 
@@ -545,12 +546,24 @@ a:focus-visible,
 
   pointer-events: none;
 
-  /* Hidden when the dog is resting */
+  /*
+     Hidden by default.
+     The closed-eye dog remains visible underneath.
+  */
   opacity: 0;
 
-  /* Only show the upper/eye portion
-     of the awake image */
-  clip-path: inset(15% 0 70% 0);
+  /*
+     IMPORTANT:
+
+     Your awake image is a FULL dog image.
+     We only reveal the upper part containing
+     the eyes.
+
+     18% from top
+     62% from bottom
+     = 20% visible area
+  */
+  clip-path: inset(18% 0 62% 0);
 
   z-index: 2;
 
@@ -558,9 +571,9 @@ a:focus-visible,
 }
 
 
-/* -----------------------------------------
-   HOVER → DOG WAKES UP
-   ----------------------------------------- */
+/* =========================================
+   HOVER → OPEN EYES
+   ========================================= */
 
 .dog-hotspot:hover .dog-awake-img,
 .dog-hotspot:focus-visible .dog-awake-img,
@@ -569,9 +582,9 @@ a:focus-visible,
 }
 
 
-/* -----------------------------------------
+/* =========================================
    NATURAL BLINK
-   ----------------------------------------- */
+   ========================================= */
 
 .dog-hotspot:hover .dog-awake-img,
 .dog-hotspot:focus-visible .dog-awake-img,
@@ -582,13 +595,13 @@ a:focus-visible,
 
 @keyframes dogBlink {
 
-  /* Eyes closed */
+  /* Closed */
   0% {
     opacity: 0;
   }
 
-  /* Eyes open */
-  10% {
+  /* Open */
+  12% {
     opacity: 1;
   }
 
@@ -597,12 +610,12 @@ a:focus-visible,
     opacity: 1;
   }
 
-  /* Blink */
+  /* Blink closed */
   77% {
     opacity: 0;
   }
 
-  /* Eyes open again */
+  /* Open again */
   83% {
     opacity: 1;
   }
@@ -614,25 +627,41 @@ a:focus-visible,
 }
 
 
-/* -----------------------------------------
-   LABEL
-   ----------------------------------------- */
+/* =========================================
+   DOG LABEL
+   ========================================= */
 
 .dog-label {
   position: absolute;
+
   top: 4%;
   left: 42%;
+
   width: max-content;
+
   padding: 7px 10px;
+
   color: #5a371f;
+
   border-radius: 8px;
+
   background: #fff1c9;
-  box-shadow: 0 7px 20px rgba(68, 36, 16, .18);
+
+  box-shadow:
+    0 7px 20px rgba(68, 36, 16, .18);
+
   font-family: var(--font-hand);
+
   font-size: clamp(.56rem, .7vw, .74rem);
+
   opacity: 0;
-  transform: translate(-50%, 6px) rotate(-2deg);
-  transition: opacity 0.25s ease, transform 0.3s ease;
+
+  transform:
+    translate(-50%, 6px) rotate(-2deg);
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.3s ease;
 }
 
 
@@ -646,9 +675,9 @@ a:focus-visible,
 }
 
 
-/* -----------------------------------------
+/* =========================================
    ACCESSIBILITY
-   ----------------------------------------- */
+   ========================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
