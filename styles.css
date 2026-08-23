@@ -316,10 +316,10 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
 /* ── Interactive Whiteboard (window sill) ── */
 .whiteboard {
   position: absolute;
-  left: 12%;
-  top: 30%;
+  left: 11%;
+  top: 45%;
   z-index: 3;
-  width: 14%;
+  width: 15%;
   aspect-ratio: 4 / 3;
   filter: drop-shadow(0 6px 18px rgba(10,5,2,.45));
   transition: filter .3s ease;
@@ -453,6 +453,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
   border-radius: inherit;
   opacity: 0;
   transform: scale(.96);
+  mix-blend-mode: multiply;
   transition: opacity .35s ease, transform .4s cubic-bezier(.34,1.2,.64,1);
   pointer-events: none;
 }
