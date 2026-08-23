@@ -37,7 +37,6 @@
         <span class="breeze-leaf" style="--lx:90.2%;--ly:2.8%;--r:76deg;--scale:1.12;--d:6.7s;--delay:-4.7s"></span>
         <span class="breeze-leaf breeze-leaf--dark" style="--lx:93.1%;--ly:8.9%;--r:32deg;--scale:.92;--d:5.9s;--delay:-.8s"></span>
         <span class="breeze-leaf breeze-leaf--lime" style="--lx:80.3%;--ly:18.4%;--r:132deg;--scale:1.15;--d:7.1s;--delay:-5.2s"></span>
-        <span class="breeze-leaf" style="--lx:84.7%;--ly:24.8%;--r:58deg;--scale:1.35;--d:6.4s;--delay:-2.1s"></span>
         <span class="breeze-leaf breeze-leaf--dark" style="--lx:89.4%;--ly:20.5%;--r:116deg;--scale:1.08;--d:5.6s;--delay:-4.2s"></span>
         <span class="breeze-leaf breeze-leaf--lime" style="--lx:92.2%;--ly:28.7%;--r:42deg;--scale:1.2;--d:7.3s;--delay:-1.9s"></span>
         <span class="breeze-leaf" style="--lx:82.1%;--ly:34.9%;--r:146deg;--scale:1.28;--d:6.1s;--delay:-3.3s"></span>
@@ -82,9 +81,8 @@
       </button>
 
       <button class="dog-hotspot" type="button" data-dog aria-label="Wake the sleepy studio dog" aria-pressed="false">
-        <span class="dog-eye dog-eye--left"  aria-hidden="true"></span>
-        <span class="dog-eye dog-eye--right" aria-hidden="true"></span>
-        <span class="dog-label">The studio helper is napping</span>
+        <img class="dog-awake-img" src="assets/dog-awake.jpg" alt="Studio dog with open eyes" aria-hidden="true">
+        <span class="dog-label">The studio helper is awake!</span>
       </button>
 
       <!-- Interactive whiteboard near the window -->
@@ -94,10 +92,10 @@
           <div class="whiteboard__hint" id="wb-hint">✏️ Draw here</div>
         </div>
         <div class="whiteboard__tray">
-          <button class="wb-color is-active" data-color="#ffffff" aria-label="White marker" style="--c:#fff" title="White"></button>
-          <button class="wb-color" data-color="#7ecaf5" aria-label="Blue marker" style="--c:#7ecaf5" title="Blue"></button>
-          <button class="wb-color" data-color="#f5a07e" aria-label="Orange marker" style="--c:#f5a07e" title="Orange"></button>
-          <button class="wb-color" data-color="#90e090" aria-label="Green marker" style="--c:#90e090" title="Green"></button>
+          <button class="wb-color is-active" data-color="#1a1a1a" aria-label="Black marker" style="--c:#1a1a1a" title="Black"></button>
+          <button class="wb-color" data-color="#1a6bbf" aria-label="Blue marker" style="--c:#1a6bbf" title="Blue"></button>
+          <button class="wb-color" data-color="#c0392b" aria-label="Red marker" style="--c:#c0392b" title="Red"></button>
+          <button class="wb-color" data-color="#27ae60" aria-label="Green marker" style="--c:#27ae60" title="Green"></button>
           <button class="wb-erase" aria-label="Clear board" title="Clear">↺</button>
         </div>
       </div>

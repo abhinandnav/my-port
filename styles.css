@@ -313,28 +313,32 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
   cursor: pointer;
 }
 
-/* ── Interactive Whiteboard ── */
+/* ── Interactive Whiteboard (window sill) ── */
 .whiteboard {
   position: absolute;
-  left: 3%;
-  top: 8%;
+  left: 12%;
+  top: 30%;
   z-index: 3;
-  width: 18%;
+  width: 14%;
   aspect-ratio: 4 / 3;
-  filter: drop-shadow(0 8px 24px rgba(10,5,2,.55));
+  filter: drop-shadow(0 6px 18px rgba(10,5,2,.45));
   transition: filter .3s ease;
 }
 .whiteboard:hover {
-  filter: drop-shadow(0 12px 32px rgba(10,5,2,.7)) drop-shadow(0 0 18px rgba(180,230,200,.18));
+  filter: drop-shadow(0 10px 26px rgba(10,5,2,.6));
 }
 .whiteboard__frame {
   position: relative;
   width: 100%;
   height: 100%;
-  border: clamp(4px,1.1%,10px) solid #5c3d1e;
-  border-radius: 4px;
-  background: #2a4a36;
-  box-shadow: inset 0 0 0 2px rgba(255,255,255,.06), inset 0 2px 8px rgba(0,0,0,.35), 2px 4px 0 #3d2810;
+  border: clamp(4px,1.2%,10px) solid #d4c9b0;
+  border-radius: 3px;
+  background: #faf8f2;
+  box-shadow:
+    inset 0 0 0 2px rgba(200,190,165,.4),
+    inset 0 1px 4px rgba(180,165,140,.15),
+    1px 3px 0 #c8bda4,
+    0 6px 20px rgba(60,40,20,.22);
   overflow: hidden;
   cursor: crosshair;
 }
@@ -342,7 +346,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(255,255,255,.025) 28px, rgba(255,255,255,.025) 29px);
+  background: linear-gradient(135deg, rgba(255,255,255,.6) 0%, transparent 55%);
   pointer-events: none;
   z-index: 1;
 }
@@ -350,7 +354,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at var(--gx,50%) var(--gy,50%), rgba(200,240,210,.07), transparent 55%);
+  background: radial-gradient(ellipse at var(--gx,50%) var(--gy,50%), rgba(120,160,200,.06), transparent 55%);
   pointer-events: none;
   z-index: 2;
   opacity: 0;
@@ -372,7 +376,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255,255,255,.28);
+  color: rgba(120,100,80,.4);
   font-family: var(--font-body);
   font-size: clamp(.5rem,.9vw,.8rem);
   letter-spacing: .04em;
@@ -382,44 +386,45 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
 .whiteboard.has-drawn .whiteboard__hint { opacity: 0; }
 .whiteboard__tray {
   position: absolute;
-  bottom: -14%;
+  bottom: -13%;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: clamp(3px,.5vw,6px);
-  padding: 4px 8px 5px;
-  background: #3d2810;
+  padding: 3px 7px 4px;
+  background: #c8bda4;
   border-radius: 0 0 4px 4px;
-  box-shadow: 0 4px 10px rgba(0,0,0,.4);
+  box-shadow: 0 3px 8px rgba(0,0,0,.22);
 }
 .wb-color {
-  width: clamp(10px,1.4vw,16px);
-  height: clamp(14px,2vw,22px);
+  width: clamp(8px,1.2vw,14px);
+  height: clamp(12px,1.8vw,20px);
   padding: 0;
-  border: 1.5px solid rgba(255,255,255,.2);
-  border-radius: 3px 3px 6px 6px;
-  background: var(--c,#fff);
+  border: 1.5px solid rgba(0,0,0,.15);
+  border-radius: 3px 3px 5px 5px;
+  background: var(--c,#222);
   cursor: pointer;
   transition: transform .15s ease, box-shadow .15s ease;
 }
 .wb-color:hover { transform: translateY(-3px) scaleY(1.08); }
-.wb-color.is-active { transform: translateY(-4px); box-shadow: 0 0 0 2px rgba(255,255,255,.6), 0 4px 8px rgba(0,0,0,.35); }
+.wb-color.is-active { transform: translateY(-4px); box-shadow: 0 0 0 2px rgba(0,0,0,.35), 0 4px 8px rgba(0,0,0,.2); }
 .wb-erase {
-  width: clamp(14px,1.8vw,20px);
-  height: clamp(14px,2vw,22px);
+  width: clamp(12px,1.6vw,18px);
+  height: clamp(12px,1.8vw,20px);
   padding: 0;
-  border: 1.5px solid rgba(255,200,150,.4);
+  border: 1.5px solid rgba(180,150,110,.5);
   border-radius: 3px;
-  background: rgba(255,180,100,.18);
-  color: rgba(255,220,170,.8);
+  background: rgba(240,220,190,.6);
+  color: rgba(100,70,40,.75);
   cursor: pointer;
-  font-size: clamp(.55rem,.9vw,.8rem);
+  font-size: clamp(.5rem,.8vw,.75rem);
   line-height: 1;
   transition: background .15s ease, transform .15s ease;
 }
-.wb-erase:hover { background: rgba(255,180,100,.35); transform: rotate(-15deg) scale(1.1); }
+.wb-erase:hover { background: rgba(240,210,170,.9); transform: rotate(-15deg) scale(1.1); }
 /* ── End Whiteboard ── */
+
 
 .dog-label {
   position: absolute;
@@ -438,74 +443,26 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
   transition: opacity .2s ease, transform .2s ease;
 }
 
-/* ── Dog eye overlays (positioned over the dog's face in the scene art) ── */
-.dog-eye {
+/* ── Dog awake image overlay ── */
+.dog-awake-img {
   position: absolute;
-  top: 28%;
-  width: 5.2%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle at 38% 35%, #f8d88a 0%, #e8a830 38%, #b06010 100%);
-  border: 1px solid #7a3c08;
-  box-shadow: inset 0 -1px 3px rgba(80,35,5,.3), 0 1px 4px rgba(60,25,5,.22);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
   opacity: 0;
-  transform: scaleY(0.05);
-  transition: opacity .22s ease, transform .3s cubic-bezier(.34,1.3,.64,1);
+  transform: scale(.96);
+  transition: opacity .35s ease, transform .4s cubic-bezier(.34,1.2,.64,1);
   pointer-events: none;
 }
-
-/* Pupil with two tiny catchlights */
-.dog-eye::after {
-  content: "";
-  position: absolute;
-  top: 26%;
-  left: 32%;
-  width: 34%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle at 33% 28%, #5a2e0e, #150800);
-  box-shadow: 2px -2px 0 1px rgba(255,255,255,.85), -1px 2px 0 rgba(255,255,255,.3);
-}
-
-/* Positions — matched to the dog's face in the scene image */
-.dog-eye--left  { left: 14%;  rotate: 7deg; }
-.dog-eye--right { left: 25%;  rotate: -7deg; }
-
-/* Wake on hover / focus / is-awake */
-.dog-hotspot:hover .dog-eye,
-.dog-hotspot:focus-visible .dog-eye,
-.dog-hotspot.is-awake .dog-eye {
+.dog-hotspot:hover .dog-awake-img,
+.dog-hotspot:focus-visible .dog-awake-img,
+.dog-hotspot.is-awake .dog-awake-img {
   opacity: 1;
-  animation: dog-wake .85s cubic-bezier(.34,1.28,.64,1) both;
+  transform: scale(1);
 }
-.dog-hotspot:hover .dog-eye--left,
-.dog-hotspot:focus-visible .dog-eye--left,
-.dog-hotspot.is-awake .dog-eye--left  { transform: scaleY(1); }
-.dog-hotspot:hover .dog-eye--right,
-.dog-hotspot:focus-visible .dog-eye--right,
-.dog-hotspot.is-awake .dog-eye--right { transform: scaleY(1); }
-
-/* Blink-open → brief squint → settle */
-@keyframes dog-wake {
-  0%         { opacity:0; transform:scaleY(.05); }
-  28%        { opacity:1; transform:scaleY(1.12); }
-  46%        { transform:scaleY(.5); }
-  66%        { transform:scaleY(1.06); }
-  80%, 100%  { opacity:1; transform:scaleY(1); }
-}
-
-/* Gentle wandering gaze while awake */
-.dog-hotspot.is-awake .dog-eye::after,
-.dog-hotspot:hover    .dog-eye::after {
-  animation: dog-gaze 3s ease-in-out .6s infinite alternate;
-}
-@keyframes dog-gaze {
-  0%   { transform: translate(-1px, 0); }
-  40%  { transform: translate(1.5px, .5px); }
-  70%  { transform: translate(.5px, -.4px); }
-  100% { transform: translate(-1px, 0); }
-}
-/* ── End dog eyes ── */
+/* ── End dog awake ── */
 
 .dog-hotspot:hover .dog-label,
 .dog-hotspot:focus-visible .dog-label,

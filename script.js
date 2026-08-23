@@ -309,7 +309,7 @@ Object.values(galleries).flatMap((gallery) => gallery.items).forEach((item) => {
   const ctx = canvas.getContext("2d");
   let drawing = false;
   let lastX = 0, lastY = 0;
-  let currentColor = "#ffffff";
+  let currentColor = "#1a1a1a";
   let hasDrawn = false;
 
   function resize() {
