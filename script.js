@@ -268,7 +268,19 @@ galleryFigure.addEventListener("pointerup", (event) => {
 
 galleryFigure.addEventListener("pointercancel", () => { pointerStart = null; });
 
-
+/* Dog wake — click toggles is-awake which triggers the eye-open CSS animation */
+dogButton.addEventListener("click", () => {
+  const waking = !dogButton.classList.contains("is-awake");
+  window.clearTimeout(dogWakeTimer);
+  dogButton.classList.toggle("is-awake", waking);
+  dogButton.setAttribute("aria-pressed", String(waking));
+  if (waking) {
+    dogWakeTimer = window.setTimeout(() => {
+      dogButton.classList.remove("is-awake");
+      dogButton.setAttribute("aria-pressed", "false");
+    }, 3000);
+  }
+});
 
 caseScroll.addEventListener("scroll", () => {
   const available = caseScroll.scrollHeight - caseScroll.clientHeight;
