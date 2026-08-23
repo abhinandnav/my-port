@@ -286,3 +286,107 @@ Object.values(galleries).flatMap((gallery) => gallery.items).forEach((item) => {
   const image = new Image();
   image.src = item.src;
 });
+
+/* ── Whiteboard drawing engine ── */
+(function () {
+  const wb       = document.getElementById("whiteboard");
+  const canvas   = document.getElementById("wb-canvas");
+  const hint     = document.getElementById("wb-hint");
+  if (!wb || !canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  let drawing = false;
+  let lastX = 0, lastY = 0;
+  let currentColor = "#ffffff";
+  let hasDrawn = false;
+
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    canvas.width  = rect.width  * devicePixelRatio;
+    canvas.height = rect.height * devicePixelRatio;
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+  }
+  resize();
+  window.addEventListener("resize", resize, { passive: true });
+
+  function getPos(e) {
+    const rect = canvas.getBoundingClientRect();
+    const src  = e.touches ? e.touches[0] : e;
+    return {
+      x: (src.clientX - rect.left),
+      y: (src.clientY - rect.top)
+    };
+  }
+
+  function startDraw(e) {
+    e.preventDefault();
+    drawing = true;
+    wb.classList.add("is-drawing");
+    const { x, y } = getPos(e);
+    lastX = x; lastY = y;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    // update glow position
+    const rect = canvas.getBoundingClientRect();
+    const gx = ((x / rect.width)  * 100).toFixed(1) + "%";
+    const gy = ((y / rect.height) * 100).toFixed(1) + "%";
+    wb.querySelector(".whiteboard__frame").style.setProperty("--gx", gx);
+    wb.querySelector(".whiteboard__frame").style.setProperty("--gy", gy);
+  }
+
+  function draw(e) {
+    if (!drawing) return;
+    e.preventDefault();
+    const { x, y } = getPos(e);
+
+    // chalk stroke: slightly randomized for texture
+    const jitter = (Math.random() - 0.5) * 0.8;
+    ctx.beginPath();
+    ctx.moveTo(lastX + jitter, lastY + jitter);
+    ctx.lineTo(x, y);
+    ctx.strokeStyle = currentColor;
+    ctx.lineWidth   = 2.2 + Math.random() * 0.8;
+    ctx.lineCap     = "round";
+    ctx.lineJoin    = "round";
+    ctx.globalAlpha = 0.75 + Math.random() * 0.25;
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    lastX = x; lastY = y;
+
+    if (!hasDrawn) {
+      hasDrawn = true;
+      wb.classList.add("has-drawn");
+    }
+  }
+
+  function stopDraw() {
+    drawing = false;
+    wb.classList.remove("is-drawing");
+  }
+
+  canvas.addEventListener("pointerdown",  startDraw, { passive: false });
+  canvas.addEventListener("pointermove",  draw,      { passive: false });
+  canvas.addEventListener("pointerup",    stopDraw);
+  canvas.addEventListener("pointerleave", stopDraw);
+  canvas.addEventListener("touchstart",   startDraw, { passive: false });
+  canvas.addEventListener("touchmove",    draw,      { passive: false });
+  canvas.addEventListener("touchend",     stopDraw);
+
+  // Color picker
+  wb.querySelectorAll(".wb-color").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      wb.querySelectorAll(".wb-color").forEach(b => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
+      currentColor = btn.dataset.color;
+    });
+  });
+
+  // Clear board
+  wb.querySelector(".wb-erase").addEventListener("click", () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    hasDrawn = false;
+    wb.classList.remove("has-drawn");
+  });
+})();
+/* ── End whiteboard ── */
