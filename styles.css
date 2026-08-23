@@ -449,9 +449,9 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
 /* ── Dog awake image overlay ── */
 .dog-awake-img {
   position: absolute;
-  left: -15%;
-  top: -8%;
-  width: 130%;
+  left: -8%;
+  top: -10%;
+  width: 115%;
   height: 115%;
   object-fit: contain;
   object-position: left bottom;
