@@ -533,7 +533,7 @@ a:focus-visible,
   position: absolute;
 
   /* Positioned over the dog's face in the scene */
-  left: 30%;
+  left: 25%;
   top: 20%;
   width: 18%;
   height: 18%;
@@ -547,6 +547,32 @@ a:focus-visible,
   opacity: 0;
   z-index: 2;
   transition: opacity 0.15s ease;
+}
+
+/* Dog label — subtle, above the hotspot, hover-only */
+.dog-label {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  width: max-content;
+  padding: 5px 9px;
+  color: #5a371f;
+  border-radius: 6px;
+  background: rgba(255, 241, 201, .85);
+  box-shadow: 0 4px 12px rgba(68, 36, 16, .12);
+  font-family: var(--font-hand);
+  font-size: .6rem;
+  line-height: 1;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 5px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.dog-hotspot:hover .dog-label,
+.dog-hotspot:focus-visible .dog-label {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
 
 .dog-hotspot:hover .dog-awake-img,
