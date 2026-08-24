@@ -532,11 +532,11 @@ a:focus-visible,
 .dog-awake-img {
   position: absolute;
 
-  /* Always 0,0 — image fills the hotspot box exactly */
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  /* Shifted right 15%, down 5%, sized down 12% */
+  left: 15%;
+  top: 5%;
+  width: 88%;
+  height: 88%;
 
   /* Crop to the dog's face/eye area in the image */
   object-fit: cover;
