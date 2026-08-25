@@ -375,147 +375,330 @@ a:focus-visible,
   overflow: visible;
 }
 
-/* ── Interactive Whiteboard (window sill) ── */
+/* =========================================
+   INTERACTIVE WHITEBOARD
+   Window-sill placement
+   ========================================= */
+
 .whiteboard {
   position: absolute;
-  left: 10%;
-  top: 38%;
-  z-index: 3;
-  width: 16%;
+
+  /* Position on the window sill */
+  left: 17%;
+  top: 31.5%;
+
+  width: 15%;
   aspect-ratio: 4 / 3;
-  /* lean slightly back like it's propped against the window */
-  transform: perspective(600px) rotateX(4deg);
+
+  /*
+   * Keep the board in front of the background
+   * and behind anything that should naturally
+   * sit in front of it.
+   */
+  z-index: 4;
+
+  /*
+   * Slight perspective so it feels physically
+   * placed against the window rather than floating.
+   */
+  transform:
+    perspective(700px) rotateX(5deg) rotateZ(-1deg);
+
   transform-origin: bottom center;
-  filter: drop-shadow(0 6px 0px rgba(160, 120, 70, .55)) drop-shadow(0 8px 18px rgba(10, 5, 2, .35));
-  transition: filter .3s ease;
+
+  filter:
+    drop-shadow(0 5px 0 rgba(160, 120, 70, .5)) drop-shadow(0 8px 16px rgba(10, 5, 2, .28));
+
+  transition:
+    filter .3s ease,
+    transform .3s ease;
 }
 
+
+/* =========================================
+   BOARD HOVER
+   ========================================= */
+
 .whiteboard:hover {
-  filter: drop-shadow(0 6px 0px rgba(160, 120, 70, .6)) drop-shadow(0 10px 24px rgba(10, 5, 2, .45));
+  transform:
+    perspective(700px) rotateX(5deg) rotateZ(-1deg) translateY(-2px);
+
+  filter:
+    drop-shadow(0 6px 0 rgba(160, 120, 70, .55)) drop-shadow(0 11px 22px rgba(10, 5, 2, .38));
 }
+
+
+/* =========================================
+   BOARD FRAME
+   ========================================= */
 
 .whiteboard__frame {
   position: relative;
+
   width: 100%;
   height: 100%;
-  border: clamp(4px, 1.2%, 10px) solid #d4c9b0;
+
+  border:
+    clamp(4px, 1.2%, 10px) solid #d4c9b0;
+
   border-radius: 3px;
+
   background: #faf8f2;
+
   box-shadow:
     inset 0 0 0 2px rgba(200, 190, 165, .4),
     inset 0 1px 4px rgba(180, 165, 140, .15),
     1px 3px 0 #c8bda4,
     0 6px 20px rgba(60, 40, 20, .22);
+
   overflow: hidden;
+
   cursor: crosshair;
 }
 
+
+/* =========================================
+   SOFT LIGHT REFLECTION
+   ========================================= */
+
 .whiteboard__frame::before {
   content: "";
+
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, .6) 0%, transparent 55%);
+
+  background:
+    linear-gradient(135deg,
+      rgba(255, 255, 255, .6) 0%,
+      transparent 55%);
+
   pointer-events: none;
+
   z-index: 1;
 }
 
+
+/* =========================================
+   DRAWING LIGHT EFFECT
+   ========================================= */
+
 .whiteboard__frame::after {
   content: "";
+
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at var(--gx, 50%) var(--gy, 50%), rgba(120, 160, 200, .06), transparent 55%);
+
+  background:
+    radial-gradient(ellipse at var(--gx, 50%) var(--gy, 50%),
+      rgba(120, 160, 200, .06),
+      transparent 55%);
+
   pointer-events: none;
+
   z-index: 2;
+
   opacity: 0;
-  transition: opacity .3s ease;
+
+  transition:
+    opacity .3s ease;
 }
 
 .whiteboard.is-drawing .whiteboard__frame::after {
   opacity: 1;
 }
 
+
+/* =========================================
+   DRAWING CANVAS
+   ========================================= */
+
 .whiteboard__canvas {
   position: absolute;
+
   inset: 0;
+
   width: 100%;
   height: 100%;
+
   z-index: 3;
+
   touch-action: none;
 }
 
+
+/* =========================================
+   EMPTY BOARD HINT
+   ========================================= */
+
 .whiteboard__hint {
   position: absolute;
+
   inset: 0;
+
   z-index: 4;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
-  color: rgba(120, 100, 80, .4);
-  font-family: var(--font-body);
-  font-size: clamp(.5rem, .9vw, .8rem);
+
+  color:
+    rgba(120, 100, 80, .4);
+
+  font-family:
+    var(--font-body);
+
+  font-size:
+    clamp(.5rem, .9vw, .8rem);
+
   letter-spacing: .04em;
+
   pointer-events: none;
-  transition: opacity .4s ease;
+
+  transition:
+    opacity .4s ease;
 }
 
 .whiteboard.has-drawn .whiteboard__hint {
   opacity: 0;
 }
 
+
+/* =========================================
+   MARKER TRAY
+   ========================================= */
+
 .whiteboard__tray {
   position: absolute;
+
   bottom: -13%;
   left: 50%;
+
   transform: translateX(-50%);
+
   display: flex;
+
   align-items: center;
-  gap: clamp(3px, .5vw, 6px);
-  padding: 3px 7px 4px;
+
+  gap:
+    clamp(3px, .5vw, 6px);
+
+  padding:
+    3px 7px 4px;
+
   background: #c8bda4;
-  border-radius: 0 0 4px 4px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, .22);
+
+  border-radius:
+    0 0 4px 4px;
+
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, .22);
 }
 
+
+/* =========================================
+   MARKER COLORS
+   ========================================= */
+
 .wb-color {
-  width: clamp(8px, 1.2vw, 14px);
-  height: clamp(12px, 1.8vw, 20px);
+  width:
+    clamp(8px, 1.2vw, 14px);
+
+  height:
+    clamp(12px, 1.8vw, 20px);
+
   padding: 0;
-  border: 1.5px solid rgba(0, 0, 0, .15);
-  border-radius: 3px 3px 5px 5px;
-  background: var(--c, #222);
+
+  border:
+    1.5px solid rgba(0, 0, 0, .15);
+
+  border-radius:
+    3px 3px 5px 5px;
+
+  background:
+    var(--c, #222);
+
   cursor: pointer;
-  transition: transform .15s ease, box-shadow .15s ease;
+
+  transition:
+    transform .15s ease,
+    box-shadow .15s ease;
 }
 
 .wb-color:hover {
-  transform: translateY(-3px) scaleY(1.08);
+  transform:
+    translateY(-3px) scaleY(1.08);
 }
 
 .wb-color.is-active {
-  transform: translateY(-4px);
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, .35), 0 4px 8px rgba(0, 0, 0, .2);
+  transform:
+    translateY(-4px);
+
+  box-shadow:
+    0 0 0 2px rgba(0, 0, 0, .35),
+    0 4px 8px rgba(0, 0, 0, .2);
 }
 
+
+/* =========================================
+   ERASE BUTTON
+   ========================================= */
+
 .wb-erase {
-  width: clamp(12px, 1.6vw, 18px);
-  height: clamp(12px, 1.8vw, 20px);
+  width:
+    clamp(12px, 1.6vw, 18px);
+
+  height:
+    clamp(12px, 1.8vw, 20px);
+
   padding: 0;
-  border: 1.5px solid rgba(180, 150, 110, .5);
+
+  border:
+    1.5px solid rgba(180, 150, 110, .5);
+
   border-radius: 3px;
-  background: rgba(240, 220, 190, .6);
-  color: rgba(100, 70, 40, .75);
+
+  background:
+    rgba(240, 220, 190, .6);
+
+  color:
+    rgba(100, 70, 40, .75);
+
   cursor: pointer;
-  font-size: clamp(.5rem, .8vw, .75rem);
+
+  font-size:
+    clamp(.5rem, .8vw, .75rem);
+
   line-height: 1;
-  transition: background .15s ease, transform .15s ease;
+
+  transition:
+    background .15s ease,
+    transform .15s ease;
 }
 
 .wb-erase:hover {
-  background: rgba(240, 210, 170, .9);
-  transform: rotate(-15deg) scale(1.1);
+  background:
+    rgba(240, 210, 170, .9);
+
+  transform:
+    rotate(-15deg) scale(1.1);
 }
 
-/* ── End Whiteboard ── */
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 700px) {
+
+  .whiteboard {
+    left: 16%;
+    top: 32%;
+
+    width: 18%;
+  }
+
+}
 
 
 /* =========================================
