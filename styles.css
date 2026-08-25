@@ -533,10 +533,10 @@ a:focus-visible,
   position: absolute;
 
   /* Positioned over the dog's face in the scene */
-  left: 15%;
-  top: 15%;
-  width: 20%;
-  height: 20%;
+  left: 8.5%;
+  top: 9.5%;
+  width: 16%;
+  height: 16%;
 
   object-fit: contain;
   object-position: center center;
