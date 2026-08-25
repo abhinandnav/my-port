@@ -301,70 +301,95 @@ Object.values(galleries).flatMap((gallery) => gallery.items).forEach((item) => {
 
 /* ── Whiteboard drawing engine ── */
 (function () {
-  const wb       = document.getElementById("whiteboard");
-  const canvas   = document.getElementById("wb-canvas");
-  const hint     = document.getElementById("wb-hint");
+  const wb = document.getElementById("whiteboard");
+  const canvas = document.getElementById("wb-canvas");
+  const hint = document.getElementById("wb-hint");
   if (!wb || !canvas) return;
 
   const ctx = canvas.getContext("2d");
   let drawing = false;
-  let lastX = 0, lastY = 0;
+  let lastX = 0;
+  let lastY = 0;
   let currentColor = "#1a1a1a";
   let hasDrawn = false;
+  let dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
 
-  function resize() {
+  function resizeCanvas() {
     const rect = canvas.getBoundingClientRect();
-    canvas.width  = rect.width  * devicePixelRatio;
-    canvas.height = rect.height * devicePixelRatio;
-    ctx.scale(devicePixelRatio, devicePixelRatio);
+    if (!rect.width || !rect.height) return;
+
+    const previous = document.createElement("canvas");
+    previous.width = canvas.width;
+    previous.height = canvas.height;
+    if (previous.width && previous.height) {
+      previous.getContext("2d").drawImage(canvas, 0, 0);
+    }
+
+    dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    canvas.width = Math.round(rect.width * dpr);
+    canvas.height = Math.round(rect.height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    if (previous.width && previous.height) {
+      ctx.drawImage(previous, 0, 0, previous.width / (previous.width / rect.width), previous.height / (previous.height / rect.height));
+    }
   }
-  resize();
-  window.addEventListener("resize", resize, { passive: true });
 
-  function getPos(e) {
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas, { passive: true });
+
+  function getPos(event) {
     const rect = canvas.getBoundingClientRect();
-    const src  = e.touches ? e.touches[0] : e;
     return {
-      x: (src.clientX - rect.left),
-      y: (src.clientY - rect.top)
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top
     };
   }
 
-  function startDraw(e) {
-    e.preventDefault();
+  function startDraw(event) {
+    if (event.button !== undefined && event.button !== 0) return;
+    event.preventDefault();
+    canvas.setPointerCapture?.(event.pointerId);
     drawing = true;
     wb.classList.add("is-drawing");
-    const { x, y } = getPos(e);
-    lastX = x; lastY = y;
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    // update glow position
+
+    const { x, y } = getPos(event);
+    lastX = x;
+    lastY = y;
+
+    const frame = wb.querySelector(".whiteboard__frame");
     const rect = canvas.getBoundingClientRect();
-    const gx = ((x / rect.width)  * 100).toFixed(1) + "%";
-    const gy = ((y / rect.height) * 100).toFixed(1) + "%";
-    wb.querySelector(".whiteboard__frame").style.setProperty("--gx", gx);
-    wb.querySelector(".whiteboard__frame").style.setProperty("--gy", gy);
+    frame.style.setProperty("--gx", `${((x / rect.width) * 100).toFixed(1)}%`);
+    frame.style.setProperty("--gy", `${((y / rect.height) * 100).toFixed(1)}%`);
+
+    ctx.beginPath();
+    ctx.arc(x, y, 1.4, 0, Math.PI * 2);
+    ctx.fillStyle = currentColor;
+    ctx.globalAlpha = 0.9;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+    hasDrawn = true;
+    wb.classList.add("has-drawn");
   }
 
-  function draw(e) {
+  function draw(event) {
     if (!drawing) return;
-    e.preventDefault();
-    const { x, y } = getPos(e);
+    event.preventDefault();
+    const { x, y } = getPos(event);
 
-    // chalk stroke: slightly randomized for texture
-    const jitter = (Math.random() - 0.5) * 0.8;
     ctx.beginPath();
-    ctx.moveTo(lastX + jitter, lastY + jitter);
+    ctx.moveTo(lastX, lastY);
     ctx.lineTo(x, y);
     ctx.strokeStyle = currentColor;
-    ctx.lineWidth   = 2.2 + Math.random() * 0.8;
-    ctx.lineCap     = "round";
-    ctx.lineJoin    = "round";
-    ctx.globalAlpha = 0.75 + Math.random() * 0.25;
+    ctx.lineWidth = 2.4;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.globalAlpha = 0.88;
     ctx.stroke();
     ctx.globalAlpha = 1;
 
-    lastX = x; lastY = y;
+    lastX = x;
+    lastY = y;
 
     if (!hasDrawn) {
       hasDrawn = true;
@@ -372,31 +397,34 @@ Object.values(galleries).flatMap((gallery) => gallery.items).forEach((item) => {
     }
   }
 
-  function stopDraw() {
+  function stopDraw(event) {
+    if (!drawing) return;
     drawing = false;
     wb.classList.remove("is-drawing");
+    if (event?.pointerId !== undefined) {
+      canvas.releasePointerCapture?.(event.pointerId);
+    }
   }
 
-  canvas.addEventListener("pointerdown",  startDraw, { passive: false });
-  canvas.addEventListener("pointermove",  draw,      { passive: false });
-  canvas.addEventListener("pointerup",    stopDraw);
+  canvas.addEventListener("pointerdown", startDraw, { passive: false });
+  canvas.addEventListener("pointermove", draw, { passive: false });
+  canvas.addEventListener("pointerup", stopDraw);
+  canvas.addEventListener("pointercancel", stopDraw);
   canvas.addEventListener("pointerleave", stopDraw);
-  canvas.addEventListener("touchstart",   startDraw, { passive: false });
-  canvas.addEventListener("touchmove",    draw,      { passive: false });
-  canvas.addEventListener("touchend",     stopDraw);
 
-  // Color picker
   wb.querySelectorAll(".wb-color").forEach((btn) => {
     btn.addEventListener("click", () => {
-      wb.querySelectorAll(".wb-color").forEach(b => b.classList.remove("is-active"));
+      wb.querySelectorAll(".wb-color").forEach((b) => b.classList.remove("is-active"));
       btn.classList.add("is-active");
       currentColor = btn.dataset.color;
     });
   });
 
-  // Clear board
-  wb.querySelector(".wb-erase").addEventListener("click", () => {
+  wb.querySelector(".wb-erase")?.addEventListener("click", () => {
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.restore();
     hasDrawn = false;
     wb.classList.remove("has-drawn");
   });
