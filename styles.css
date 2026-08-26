@@ -442,6 +442,17 @@ a:focus-visible,
   z-index: 2;
 
   touch-action: none;
+
+  /*
+   * Match the actual white writing surface.
+   * The board is slightly tilted, so the
+   * drawing area is a trapezoid rather than
+   * a rectangle.
+   */
+  clip-path: polygon(10% 12%,
+      89% 3%,
+      96% 78%,
+      17% 89%);
 }
 
 
