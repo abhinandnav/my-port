@@ -344,8 +344,24 @@ Object.values(galleries).flatMap((gallery) => gallery.items).forEach((item) => {
     let x = event.clientX - rect.left;
     let y = event.clientY - rect.top;
 
-    x = Math.max(0, Math.min(x, rect.width));
-    y = Math.max(0, Math.min(y, rect.height));
+    /*
+     * Safe drawing area inside the whiteboard.
+     * Increase these values if the line still
+     * reaches the frame.
+     */
+
+    const paddingX = rect.width * 0.08;
+    const paddingY = rect.height * 0.08;
+
+    x = Math.max(
+      paddingX,
+      Math.min(x, rect.width - paddingX)
+    );
+
+    y = Math.max(
+      paddingY,
+      Math.min(y, rect.height - paddingY)
+    );
 
     return {
       x: x,
