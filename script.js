@@ -108,21 +108,23 @@ function openDialog(dialog) {
 
   if (!dialog) return;
 
-  /*
-   * Close EVERY other dialog first.
-   */
-  document.querySelectorAll("dialog[open]").forEach((openDialog) => {
-    if (openDialog !== dialog) {
-      openDialog.close();
+  /* Close every other dialog first */
+  Object.values(dialogs).forEach((otherDialog) => {
+
+    if (
+      otherDialog &&
+      otherDialog !== dialog &&
+      otherDialog.open
+    ) {
+      otherDialog.close();
     }
+
   });
 
-  /*
-   * Already open — do nothing.
-   */
-  if (dialog.open) return;
-
-  dialog.showModal();
+  /* Open the requested dialog */
+  if (!dialog.open) {
+    dialog.showModal();
+  }
 }
 
 function closeDialog(dialog) {
@@ -197,13 +199,21 @@ function openCaseStudy(name) {
   const template =
     document.querySelector(`#${name}-template`);
 
-  if (!template) return;
+  if (!template) {
+    console.error("Case study template not found:", name);
+    return;
+  }
 
   const fragment =
     template.content.cloneNode(true);
 
   const article =
     fragment.querySelector(".case-study");
+
+  if (!article) {
+    console.error("Case study article not found:", name);
+    return;
+  }
 
   caseTitle.textContent =
     article.dataset.caseTitle || "Case study";
@@ -217,65 +227,57 @@ function openCaseStudy(name) {
     "0%"
   );
 
-  /*
-   * Explicitly close every other modal.
-   */
-  closeDialog(dialogs.ux);
+  /* Close EVERYTHING else */
   closeDialog(dialogs.gallery);
+  closeDialog(dialogs.ux);
   closeDialog(dialogs.resume);
 
-  /*
-   * Now open ONLY the case study.
-   */
+  /* Open ONLY case study */
   openDialog(dialogs.case);
 
   requestAnimationFrame(() => {
+
     caseScroll.focus({
       preventScroll: true
     });
+
   });
 }
 
 document.addEventListener("click", (event) => {
 
-  /* =========================================
-     CLOSE BUTTON
-     ========================================= */
+  /* ================================
+     CLOSE CURRENT MODAL
+     ================================ */
 
   const closeButton = event.target.closest("[data-close]");
 
   if (closeButton) {
     event.preventDefault();
-    event.stopPropagation();
+    event.stopImmediatePropagation();
 
-    const currentDialog = closeButton.closest("dialog");
+    const dialog = closeButton.closest("dialog");
 
-    if (currentDialog) {
-      currentDialog.close();
+    if (dialog) {
+      dialog.close();
     }
 
     return;
   }
 
 
-  /* =========================================
+  /* ================================
      BACK TO UX PROJECTS
-     ========================================= */
+     ================================ */
 
-  const backButton = event.target.closest("[data-back-projects]");
+  const backButton =
+    event.target.closest("[data-back-projects]");
 
   if (backButton) {
     event.preventDefault();
-    event.stopPropagation();
+    event.stopImmediatePropagation();
 
     closeDialog(dialogs.case);
-
-    /*
-     * Make absolutely sure no other dialog
-     * remains open.
-     */
-    closeDialog(dialogs.gallery);
-    closeDialog(dialogs.resume);
 
     openDialog(dialogs.ux);
 
@@ -283,15 +285,16 @@ document.addEventListener("click", (event) => {
   }
 
 
-  /* =========================================
-     CASE STUDY SELECTION
-     ========================================= */
+  /* ================================
+     OPEN CASE STUDY
+     ================================ */
 
-  const caseButton = event.target.closest("[data-case]");
+  const caseButton =
+    event.target.closest("[data-case]");
 
   if (caseButton) {
     event.preventDefault();
-    event.stopPropagation();
+    event.stopImmediatePropagation();
 
     openCaseStudy(caseButton.dataset.case);
 
@@ -299,16 +302,14 @@ document.addEventListener("click", (event) => {
   }
 
 
-  /* =========================================
-     GALLERY NAVIGATION
-     ========================================= */
+  /* ================================
+     GALLERY PREVIOUS
+     ================================ */
 
-  const previousButton =
-    event.target.closest("[data-gallery-prev]");
+  if (event.target.closest("[data-gallery-prev]")) {
 
-  if (previousButton) {
     event.preventDefault();
-    event.stopPropagation();
+    event.stopImmediatePropagation();
 
     moveGallery(-1);
 
@@ -316,12 +317,14 @@ document.addEventListener("click", (event) => {
   }
 
 
-  const nextButton =
-    event.target.closest("[data-gallery-next]");
+  /* ================================
+     GALLERY NEXT
+     ================================ */
 
-  if (nextButton) {
+  if (event.target.closest("[data-gallery-next]")) {
+
     event.preventDefault();
-    event.stopPropagation();
+    event.stopImmediatePropagation();
 
     moveGallery(1);
 
@@ -329,9 +332,9 @@ document.addEventListener("click", (event) => {
   }
 
 
-  /* =========================================
-     GALLERY THUMBNAIL
-     ========================================= */
+  /* ================================
+     GALLERY THUMBNAILS
+     ================================ */
 
   const thumb =
     event.target.closest("[data-gallery-index]");
@@ -339,7 +342,7 @@ document.addEventListener("click", (event) => {
   if (thumb) {
 
     event.preventDefault();
-    event.stopPropagation();
+    event.stopImmediatePropagation();
 
     const next =
       Number(thumb.dataset.galleryIndex);
@@ -355,34 +358,9 @@ document.addEventListener("click", (event) => {
   }
 
 
-  /* =========================================
-     CASE STUDY INTERNAL NAVIGATION
-     ========================================= */
-
-  const jump =
-    event.target.closest("[data-jump]");
-
-  if (jump) {
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    caseScroll
-      .querySelector(`#${jump.dataset.jump}`)
-      ?.scrollIntoView({
-        block: "start",
-        behavior: reducedMotion.matches
-          ? "auto"
-          : "smooth"
-      });
-
-    return;
-  }
-
-
-  /* =========================================
-     MAIN PORTFOLIO HOTSPOTS
-     ========================================= */
+  /* ================================
+     MAIN PORTFOLIO ACTIONS
+     ================================ */
 
   const action =
     event.target.closest("[data-action]");
@@ -390,7 +368,7 @@ document.addEventListener("click", (event) => {
   if (action) {
 
     event.preventDefault();
-    event.stopPropagation();
+    event.stopImmediatePropagation();
 
     quietInvitation();
 
@@ -422,7 +400,6 @@ document.addEventListener("click", (event) => {
       return;
     }
   }
-
 });
 Object.values(dialogs).forEach((dialog) => {
   dialog.addEventListener("click", (event) => {
