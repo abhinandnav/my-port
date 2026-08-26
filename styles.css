@@ -581,26 +581,15 @@ a:focus-visible,
 
 .wb-erase:hover {
   background: rgba(240, 210, 170, .9);
-
-  transform:
-    rotate(-15deg) scale(1.1);
+  transform: rotate(-15deg) scale(1.1);
 }
 
 /* =========================================
    DOG EYE ANIMATION
    ========================================= */
 
-
-
-
-/* =========================================
-   OPEN EYE IMAGE
-   ========================================= */
-
 .dog-awake-img {
   position: absolute;
-
-  /* Positioned over the dog's face in the scene */
   left: 17%;
   top: 29.5%;
   width: 18%;
@@ -677,18 +666,8 @@ a:focus-visible,
   }
 }
 
-/* =========================================
-   ACCESSIBILITY
-   ========================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-  .dog-hotspot:hover .dog-awake-img,
-  .dog-hotspot:focus-visible .dog-awake-img,
-  .dog-hotspot.is-awake .dog-awake-img {
-    animation: none;
-  }
-}
+/* Reduced-motion for dog animation is handled by the global
+   prefers-reduced-motion block at the bottom of this file. */
 
 
 /* Modal foundations */
@@ -2019,11 +1998,11 @@ a:focus-visible,
 }
 
 .priority-dot--gold {
-  background: #e8bd6a
+  background: #e8bd6a;
 }
 
 .priority-dot--green {
-  background: #84b578
+  background: #84b578;
 }
 
 .journey-steps {
