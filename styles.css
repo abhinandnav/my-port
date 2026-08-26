@@ -692,6 +692,21 @@ a:focus-visible,
   backdrop-filter: blur(12px) saturate(.78);
 }
 
+/* ── Performance: freeze background when a modal is open ──
+   backdrop-filter: blur() is GPU-expensive when content
+   behind it is constantly animating. Pause everything. */
+body.has-modal .breeze-leaf {
+  animation-play-state: paused !important;
+}
+
+body.has-modal .hotspot {
+  animation-play-state: paused !important;
+}
+
+body.has-modal .scene-glow {
+  opacity: 0;
+}
+
 .modal[open] .modal-shell {
   animation: modal-arrive .42s cubic-bezier(.2, .8, .2, 1) both;
 }

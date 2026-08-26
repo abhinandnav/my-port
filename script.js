@@ -125,11 +125,22 @@ function openDialog(dialog) {
   if (!dialog.open) {
     dialog.showModal();
   }
+
+  /* Pause background animations for performance */
+  document.body.classList.add("has-modal");
 }
 
 function closeDialog(dialog) {
   if (dialog?.open) dialog.close();
 }
+
+/* Resume background animations when ALL dialogs are closed */
+Object.values(dialogs).forEach((dialog) => {
+  dialog.addEventListener("close", () => {
+    const anyOpen = Object.values(dialogs).some((d) => d.open);
+    if (!anyOpen) document.body.classList.remove("has-modal");
+  });
+});
 
 function quietInvitation() {
   exploreHint.classList.add("is-quiet");
@@ -455,6 +466,8 @@ caseScroll.addEventListener("scroll", () => {
 
 window.addEventListener("pointermove", (event) => {
   if (reducedMotion.matches || event.pointerType === "touch") return;
+  /* Skip when a modal is open — scene-glow is hidden anyway */
+  if (document.body.classList.contains("has-modal")) return;
   document.documentElement.style.setProperty("--mouse-x", `${(event.clientX / window.innerWidth) * 100}%`);
   document.documentElement.style.setProperty("--mouse-y", `${(event.clientY / window.innerHeight) * 100}%`);
 }, { passive: true });
