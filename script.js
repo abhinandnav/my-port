@@ -337,12 +337,19 @@ Object.values(galleries).flatMap((gallery) => gallery.items).forEach((item) => {
 
   resizeCanvas();
   window.addEventListener("resize", resizeCanvas, { passive: true });
-
   function getPos(event) {
+
     const rect = canvas.getBoundingClientRect();
+
+    let x = event.clientX - rect.left;
+    let y = event.clientY - rect.top;
+
+    x = Math.max(0, Math.min(x, rect.width));
+    y = Math.max(0, Math.min(y, rect.height));
+
     return {
-      x: event.clientX - rect.left,
-      y: event.clientY - rect.top
+      x: x,
+      y: y
     };
   }
 
