@@ -105,8 +105,23 @@ let pointerStart = null;
 let dogWakeTimer = null;
 
 function openDialog(dialog) {
-  if (!dialog || dialog.open) return;
-  document.querySelectorAll("dialog[open]").forEach((open) => open.close());
+
+  if (!dialog) return;
+
+  /*
+   * Close EVERY other dialog first.
+   */
+  document.querySelectorAll("dialog[open]").forEach((openDialog) => {
+    if (openDialog !== dialog) {
+      openDialog.close();
+    }
+  });
+
+  /*
+   * Already open — do nothing.
+   */
+  if (dialog.open) return;
+
   dialog.showModal();
 }
 
@@ -178,64 +193,237 @@ function moveGallery(step) {
 }
 
 function openCaseStudy(name) {
-  const template = document.querySelector(`#${name}-template`);
+
+  const template =
+    document.querySelector(`#${name}-template`);
+
   if (!template) return;
-  const fragment = template.content.cloneNode(true);
-  const article = fragment.querySelector(".case-study");
-  caseTitle.textContent = article.dataset.caseTitle || "Case study";
+
+  const fragment =
+    template.content.cloneNode(true);
+
+  const article =
+    fragment.querySelector(".case-study");
+
+  caseTitle.textContent =
+    article.dataset.caseTitle || "Case study";
+
   caseScroll.replaceChildren(fragment);
+
   caseScroll.scrollTop = 0;
-  progressBar.style.setProperty("--progress", "0%");
+
+  progressBar.style.setProperty(
+    "--progress",
+    "0%"
+  );
+
+  /*
+   * Explicitly close every other modal.
+   */
   closeDialog(dialogs.ux);
+  closeDialog(dialogs.gallery);
+  closeDialog(dialogs.resume);
+
+  /*
+   * Now open ONLY the case study.
+   */
   openDialog(dialogs.case);
-  requestAnimationFrame(() => caseScroll.focus({ preventScroll: true }));
+
+  requestAnimationFrame(() => {
+    caseScroll.focus({
+      preventScroll: true
+    });
+  });
 }
 
 document.addEventListener("click", (event) => {
-  const action = event.target.closest("[data-action]");
-  if (action) {
-    quietInvitation();
-    const type = action.dataset.action;
-    if (type === "ux") openDialog(dialogs.ux);
-    if (type === "profile") openDialog(dialogs.resume);
-    if (type === "graphic" || type === "photo") openGallery(type, action.dataset.index);
-    return;
-  }
 
-  const caseButton = event.target.closest("[data-case]");
-  if (caseButton) {
-    openCaseStudy(caseButton.dataset.case);
-    return;
-  }
+  /* =========================================
+     CLOSE BUTTON
+     ========================================= */
 
   const closeButton = event.target.closest("[data-close]");
+
   if (closeButton) {
-    closeDialog(closeButton.closest("dialog"));
+    event.preventDefault();
+    event.stopPropagation();
+
+    const currentDialog = closeButton.closest("dialog");
+
+    if (currentDialog) {
+      currentDialog.close();
+    }
+
     return;
   }
 
-  if (event.target.closest("[data-gallery-prev]")) moveGallery(-1);
-  if (event.target.closest("[data-gallery-next]")) moveGallery(1);
 
-  const thumb = event.target.closest("[data-gallery-index]");
-  if (thumb) {
-    const next = Number(thumb.dataset.galleryIndex);
-    const direction = next >= galleryIndex ? 1 : -1;
-    galleryIndex = next;
-    renderGallery(direction);
-  }
+  /* =========================================
+     BACK TO UX PROJECTS
+     ========================================= */
 
-  if (event.target.closest("[data-back-projects]")) {
+  const backButton = event.target.closest("[data-back-projects]");
+
+  if (backButton) {
+    event.preventDefault();
+    event.stopPropagation();
+
     closeDialog(dialogs.case);
+
+    /*
+     * Make absolutely sure no other dialog
+     * remains open.
+     */
+    closeDialog(dialogs.gallery);
+    closeDialog(dialogs.resume);
+
     openDialog(dialogs.ux);
+
+    return;
   }
 
-  const jump = event.target.closest("[data-jump]");
+
+  /* =========================================
+     CASE STUDY SELECTION
+     ========================================= */
+
+  const caseButton = event.target.closest("[data-case]");
+
+  if (caseButton) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    openCaseStudy(caseButton.dataset.case);
+
+    return;
+  }
+
+
+  /* =========================================
+     GALLERY NAVIGATION
+     ========================================= */
+
+  const previousButton =
+    event.target.closest("[data-gallery-prev]");
+
+  if (previousButton) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    moveGallery(-1);
+
+    return;
+  }
+
+
+  const nextButton =
+    event.target.closest("[data-gallery-next]");
+
+  if (nextButton) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    moveGallery(1);
+
+    return;
+  }
+
+
+  /* =========================================
+     GALLERY THUMBNAIL
+     ========================================= */
+
+  const thumb =
+    event.target.closest("[data-gallery-index]");
+
+  if (thumb) {
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const next =
+      Number(thumb.dataset.galleryIndex);
+
+    const direction =
+      next >= galleryIndex ? 1 : -1;
+
+    galleryIndex = next;
+
+    renderGallery(direction);
+
+    return;
+  }
+
+
+  /* =========================================
+     CASE STUDY INTERNAL NAVIGATION
+     ========================================= */
+
+  const jump =
+    event.target.closest("[data-jump]");
+
   if (jump) {
-    caseScroll.querySelector(`#${jump.dataset.jump}`)?.scrollIntoView({ block: "start", behavior: reducedMotion.matches ? "auto" : "smooth" });
-  }
-});
 
+    event.preventDefault();
+    event.stopPropagation();
+
+    caseScroll
+      .querySelector(`#${jump.dataset.jump}`)
+      ?.scrollIntoView({
+        block: "start",
+        behavior: reducedMotion.matches
+          ? "auto"
+          : "smooth"
+      });
+
+    return;
+  }
+
+
+  /* =========================================
+     MAIN PORTFOLIO HOTSPOTS
+     ========================================= */
+
+  const action =
+    event.target.closest("[data-action]");
+
+  if (action) {
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    quietInvitation();
+
+    const type = action.dataset.action;
+
+    if (type === "ux") {
+      openDialog(dialogs.ux);
+      return;
+    }
+
+    if (type === "profile") {
+      openDialog(dialogs.resume);
+      return;
+    }
+
+    if (type === "graphic") {
+      openGallery(
+        "graphic",
+        action.dataset.index
+      );
+      return;
+    }
+
+    if (type === "photo") {
+      openGallery(
+        "photo",
+        action.dataset.index
+      );
+      return;
+    }
+  }
+
+});
 Object.values(dialogs).forEach((dialog) => {
   dialog.addEventListener("click", (event) => {
     if (event.target === dialog) dialog.close();
