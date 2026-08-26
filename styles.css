@@ -378,8 +378,8 @@ a:focus-visible,
 .whiteboard {
   position: absolute;
 
-  left: 24%;
-  top: 24%;
+  left: 20%;
+  top: 23%;
 
   width: 18%;
   aspect-ratio: 4 / 3;
