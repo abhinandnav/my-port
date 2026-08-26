@@ -341,31 +341,70 @@ Object.values(galleries).flatMap((gallery) => gallery.items).forEach((item) => {
 
     const rect = canvas.getBoundingClientRect();
 
-    let x = event.clientX - rect.left;
-    let y = event.clientY - rect.top;
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
 
     /*
-     * Safe drawing area inside the whiteboard.
-     * Increase these values if the line still
-     * reaches the frame.
+     * Actual writable whiteboard surface.
+     *
+     * Points are:
+     * top-left
+     * top-right
+     * bottom-right
+     * bottom-left
+     *
+     * These values follow the perspective
+     * of your illustrated board.
      */
 
-    const paddingX = rect.width * 0.08;
-    const paddingY = rect.height * 0.08;
+    const board = [
+      { x: rect.width * 0.10, y: rect.height * 0.16 },
+      { x: rect.width * 0.84, y: rect.height * 0.07 },
+      { x: rect.width * 0.87, y: rect.height * 0.63 },
+      { x: rect.width * 0.20, y: rect.height * 0.84 }
+    ];
 
-    x = Math.max(
-      paddingX,
-      Math.min(x, rect.width - paddingX)
-    );
+    /*
+     * Check whether the pointer is inside
+     * the actual white writing surface.
+     */
 
-    y = Math.max(
-      paddingY,
-      Math.min(y, rect.height - paddingY)
-    );
+    function insidePolygon(px, py, points) {
+
+      let inside = false;
+
+      for (
+        let i = 0, j = points.length - 1;
+        i < points.length;
+        j = i++
+      ) {
+
+        const xi = points[i].x;
+        const yi = points[i].y;
+
+        const xj = points[j].x;
+        const yj = points[j].y;
+
+        const intersect =
+          ((yi > py) !== (yj > py)) &&
+          (px <
+            (xj - xi) *
+            (py - yi) /
+            (yj - yi) +
+            xi);
+
+        if (intersect) {
+          inside = !inside;
+        }
+      }
+
+      return inside;
+    }
 
     return {
-      x: x,
-      y: y
+      x,
+      y,
+      inside: insidePolygon(x, y, board)
     };
   }
 
@@ -376,7 +415,10 @@ Object.values(galleries).flatMap((gallery) => gallery.items).forEach((item) => {
     drawing = true;
     wb.classList.add("is-drawing");
 
-    const { x, y } = getPos(event);
+    const { x, y, inside } = getPos(event);
+
+    if (!inside) return;
+
     lastX = x;
     lastY = y;
 
@@ -398,7 +440,11 @@ Object.values(galleries).flatMap((gallery) => gallery.items).forEach((item) => {
   function draw(event) {
     if (!drawing) return;
     event.preventDefault();
-    const { x, y } = getPos(event);
+    const { x, y, inside } = getPos(event);
+
+    if (!inside) {
+      return;
+    }
 
     ctx.beginPath();
     ctx.moveTo(lastX, lastY);
