@@ -670,7 +670,13 @@ a:focus-visible,
    prefers-reduced-motion block at the bottom of this file. */
 
 
-/* Modal foundations */
+/* Modal foundations
+   IMPORTANT: display:flex overrides the UA's dialog:not([open]) { display:none },
+   so we must restore it explicitly to prevent closed dialogs from rendering. */
+.modal:not([open]) {
+  display: none;
+}
+
 .modal {
   width: 100vw;
   max-width: none;
