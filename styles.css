@@ -110,24 +110,24 @@ a:focus-visible,
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 10px 13px;
+  padding: 12px 16px;
   color: #fffaf0;
-  border: 1px solid rgba(255, 255, 255, .22);
+  border: 1px solid rgba(255, 255, 255, .28);
   border-radius: 12px;
-  background: rgba(49, 28, 14, .34);
-  box-shadow: 0 8px 26px rgba(32, 17, 7, .12);
-  backdrop-filter: blur(10px);
+  background: rgba(40, 22, 10, .62);
+  box-shadow: 0 8px 26px rgba(32, 17, 7, .22);
+  backdrop-filter: blur(14px);
 }
 
 .site-mark__name {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 1.08rem;
   font-weight: 700;
 }
 
 .site-mark__role {
-  color: rgba(255, 250, 240, .76);
-  font-size: .66rem;
+  color: rgba(255, 250, 240, .88);
+  font-size: .7rem;
   letter-spacing: .07em;
   text-transform: uppercase;
 }
@@ -139,21 +139,21 @@ a:focus-visible,
   z-index: 5;
   display: flex;
   gap: 4px;
-  padding: 5px;
-  border: 1px solid rgba(255, 255, 255, .2);
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, .28);
   border-radius: 999px;
-  background: rgba(49, 28, 14, .36);
-  backdrop-filter: blur(12px);
+  background: rgba(40, 22, 10, .62);
+  backdrop-filter: blur(14px);
 }
 
 .quick-nav button {
-  padding: 8px 12px;
-  color: rgba(255, 250, 240, .84);
+  padding: 8px 14px;
+  color: rgba(255, 250, 240, .95);
   border: 0;
   border-radius: 999px;
   background: transparent;
   cursor: pointer;
-  font-size: .73rem;
+  font-size: .8rem;
   font-weight: 700;
   letter-spacing: .03em;
   transition: color .2s ease, background .2s ease;
@@ -171,14 +171,14 @@ a:focus-visible,
   left: 50%;
   z-index: 5;
   margin: 0;
-  padding: 10px 15px;
+  padding: 10px 18px;
   color: #fffaf0;
-  border: 1px solid rgba(255, 255, 255, .22);
+  border: 1px solid rgba(255, 255, 255, .3);
   border-radius: 999px;
-  background: rgba(51, 29, 14, .45);
-  box-shadow: 0 10px 30px rgba(35, 18, 7, .18);
-  backdrop-filter: blur(12px);
-  font-size: .78rem;
+  background: rgba(42, 22, 10, .72);
+  box-shadow: 0 10px 30px rgba(35, 18, 7, .26);
+  backdrop-filter: blur(14px);
+  font-size: .82rem;
   transform: translateX(-50%);
   transition: opacity .5s ease, transform .5s ease;
 }
@@ -189,8 +189,8 @@ a:focus-visible,
 }
 
 .explore-hint.is-quiet {
-  opacity: .34;
-  transform: translateX(-50%) translateY(8px);
+  opacity: .55;
+  transform: translateX(-50%) translateY(4px);
 }
 
 .hotspot {
@@ -938,14 +938,16 @@ body.has-modal .scene-glow {
 
 /* Gallery */
 .gallery-shell {
-  width: min(1260px, 96vw);
-  height: min(940px, 96svh);
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr) 56px 0;
+  width: min(1180px, 94vw);
+  max-height: 92svh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .gallery-header {
   padding: 16px 22px 14px;
+  flex-shrink: 0;
 }
 
 .gallery-header__actions {
@@ -961,46 +963,42 @@ body.has-modal .scene-glow {
 }
 
 .gallery-main {
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 4px 22px 8px;
+  flex: 1 1 auto;
   min-height: 0;
-  grid-template-columns: 58px minmax(0, 1fr) 58px;
-  align-items: stretch;
-  overflow: hidden;
-  padding: 10px 8px 2px;
 }
 
 .gallery-figure {
-  display: grid;
-  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   min-height: 0;
-  height: 100%;
-  grid-template-rows: minmax(0, 1fr) 70px;
-  gap: 8px;
+  flex: 1 1 auto;
   margin: 0;
   overflow: hidden;
 }
 
 .gallery-image-wrap {
-  position: relative;
-  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 auto;
   min-height: 0;
-  height: 100%;
   overflow: hidden;
   border-radius: 14px;
-  background: #eee3d1;
-  contain: layout paint;
+  background: #17130f;
 }
 
 .gallery-image-wrap img {
-  position: absolute;
-  inset: 0;
   display: block;
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
-  object-position: center;
   user-select: none;
-  touch-action: pan-y;
 }
 
 #gallery-dialog[data-mode="photo"] .gallery-image-wrap {
@@ -1008,13 +1006,12 @@ body.has-modal .scene-glow {
 }
 
 .gallery-figure figcaption {
+  flex-shrink: 0;
   display: grid;
-  height: 70px;
-  grid-template-columns: minmax(220px, .72fr) 1.28fr;
+  grid-template-columns: minmax(200px, .72fr) 1fr;
+  align-items: start;
   gap: 24px;
-  align-items: center;
-  overflow: hidden;
-  padding: 0 6px;
+  padding: 6px 6px 0;
 }
 
 .gallery-figure h3 {
