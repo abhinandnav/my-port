@@ -938,15 +938,15 @@ body.has-modal .scene-glow {
 
 /* Gallery */
 .gallery-shell {
-  width: min(1180px, 94vw);
-  max-height: 92svh;
+  width: min(1060px, 92vw);
+  max-height: 90svh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
 .gallery-header {
-  padding: 16px 22px 14px;
+  padding: 14px 22px 10px;
   flex-shrink: 0;
 }
 
@@ -965,44 +965,35 @@ body.has-modal .scene-glow {
 .gallery-main {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 4px 22px 8px;
-  flex: 1 1 auto;
+  gap: 10px;
+  padding: 0 16px 6px;
   min-height: 0;
 }
 
 .gallery-figure {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  min-height: 0;
+  gap: 8px;
+  min-width: 0;
   flex: 1 1 auto;
   margin: 0;
-  overflow: hidden;
 }
 
 .gallery-image-wrap {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-height: 58vh;
-  min-height: 0;
   overflow: hidden;
-  border-radius: 14px;
-  background: #17130f;
+  border-radius: 12px;
 }
 
 .gallery-image-wrap img {
   display: block;
   max-width: 100%;
-  max-height: 58vh;
+  max-height: 52vh;
   object-fit: contain;
+  border-radius: 12px;
   user-select: none;
-}
-
-#gallery-dialog[data-mode="photo"] .gallery-image-wrap {
-  background: #17130f;
 }
 
 .gallery-figure figcaption {
