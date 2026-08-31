@@ -985,14 +985,20 @@ body.has-modal .scene-glow {
   align-items: center;
   overflow: hidden;
   border-radius: 12px;
+  background: #f3ebe0;
+}
+
+/* Photo mode uses dark bg to let images breathe */
+#gallery-dialog[data-mode="photo"] .gallery-image-wrap {
+  background: #1a1510;
 }
 
 .gallery-image-wrap img {
   display: block;
   max-width: 100%;
-  max-height: 62vh;
+  max-height: 60vh;
   object-fit: contain;
-  border-radius: 12px;
+  border-radius: 8px;
   user-select: none;
 }
 
@@ -2515,56 +2521,62 @@ body.has-modal .scene-glow {
 
   .gallery-shell {
     width: 97vw;
-    height: 95svh;
-    grid-template-rows: auto minmax(0, 1fr) 54px 0;
-  }
-
-  .gallery-main {
-    grid-template-columns: 42px minmax(0, 1fr) 42px;
-    padding: 8px 2px;
-  }
-
-  .gallery-arrow {
-    width: 36px;
-    height: 36px;
-  }
-
-  .gallery-figure {
-    grid-template-rows: minmax(0, 1fr) 64px;
-    gap: 4px;
-  }
-
-  .gallery-image-wrap img {
-    padding: 4px;
-  }
-
-  .gallery-figure figcaption {
-    height: 64px;
-    grid-template-columns: 1fr;
-    gap: 2px;
-    align-content: center;
-  }
-
-  .gallery-figure figcaption>p {
-    display: none;
+    max-height: 95svh;
   }
 
   .gallery-header {
-    padding: 15px 17px;
+    padding: 12px 14px 8px;
   }
 
   .gallery-header h2 {
-    font-size: 1.35rem;
+    font-size: 1.2rem;
+  }
+
+  .gallery-main {
+    gap: 6px;
+    padding: 0 6px 4px;
+  }
+
+  .gallery-arrow {
+    width: 34px;
+    height: 34px;
+    font-size: .95rem;
+    flex-shrink: 0;
+  }
+
+  .gallery-image-wrap img {
+    max-height: 50vh;
+  }
+
+  .gallery-figure {
+    gap: 6px;
+  }
+
+  .gallery-figure figcaption {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 4px 4px 0;
+  }
+
+  .gallery-figure figcaption > p {
+    display: none;
+  }
+
+  .gallery-figure h3 {
+    font-size: 1.05rem;
   }
 
   .gallery-thumbs {
-    height: 54px;
-    padding: 5px 12px 7px;
+    padding: 4px 10px 6px;
   }
 
   .gallery-thumb {
-    width: 46px;
-    height: 38px;
+    width: 42px;
+    height: 34px;
+  }
+
+  .swipe-note {
+    display: none;
   }
 
   .resume-shell {
@@ -2704,6 +2716,123 @@ body.has-modal .scene-glow {
 
   .palette i {
     height: 60px;
+  }
+}
+
+/* ── Extra small phones ────────────────────── */
+@media (max-width: 420px) {
+  .site-mark {
+    top: 8px;
+    left: 8px;
+    padding: 6px 8px;
+  }
+
+  .site-mark__name {
+    font-size: .88rem;
+  }
+
+  .site-mark__role {
+    display: none;
+  }
+
+  .quick-nav {
+    bottom: 48px;
+    gap: 2px;
+    padding: 4px;
+  }
+
+  .quick-nav button {
+    padding: 6px 8px;
+    font-size: .68rem;
+  }
+
+  .explore-hint {
+    bottom: 8px;
+    font-size: .62rem;
+    padding: 7px 12px;
+  }
+
+  .gallery-shell {
+    width: 100vw;
+    max-height: 100svh;
+    border-radius: 14px;
+  }
+
+  .gallery-header {
+    padding: 10px 12px 6px;
+  }
+
+  .gallery-header h2 {
+    font-size: 1rem;
+  }
+
+  .gallery-main {
+    padding: 0 4px 2px;
+  }
+
+  .gallery-arrow {
+    width: 28px;
+    height: 28px;
+    font-size: .85rem;
+  }
+
+  .gallery-image-wrap img {
+    max-height: 42vh;
+  }
+
+  .gallery-figure figcaption {
+    padding: 2px 6px 0;
+  }
+
+  .gallery-figure h3 {
+    font-size: .92rem;
+  }
+
+  .gallery-thumbs {
+    padding: 3px 8px 4px;
+  }
+
+  .gallery-thumb {
+    width: 36px;
+    height: 30px;
+  }
+
+  .modal-header {
+    padding: 14px;
+  }
+
+  .modal-header h2 {
+    font-size: 1.15rem;
+  }
+
+  .choice-shell {
+    width: 100vw;
+  }
+
+  .project-choice {
+    min-height: 280px;
+  }
+
+  .resume-shell {
+    width: 100vw;
+  }
+
+  .profile-panel {
+    padding: 18px;
+    min-height: 580px;
+  }
+
+  .case-shell {
+    width: 100vw;
+  }
+
+  .case-hero {
+    padding: 40px 18px;
+    min-height: 500px;
+  }
+
+  .story-section {
+    padding: 40px 16px;
   }
 }
 
