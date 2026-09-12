@@ -209,7 +209,8 @@ a:focus-visible,
   cursor: pointer;
   opacity: .25;
   transition: opacity .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease, transform .25s ease;
-  animation: hotspot-breathe 4.8s ease-in-out var(--delay) infinite;
+  animation: hotspot-breathe 4.8s ease-in-out var(--delay) infinite,
+             hotspot-nudge 6s ease-in-out calc(var(--delay) + 2s) infinite;
 }
 
 .hotspot:hover,
@@ -274,6 +275,25 @@ a:focus-visible,
   82% {
     box-shadow: 0 0 0 6px rgba(255, 221, 122, .12);
     opacity: .58;
+  }
+}
+
+/* Subtle wiggle nudge to signal interactivity */
+@keyframes hotspot-nudge {
+  0%, 85%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  88% {
+    transform: rotate(-1.5deg) scale(1.04);
+  }
+  91% {
+    transform: rotate(1.2deg) scale(1.02);
+  }
+  94% {
+    transform: rotate(-.8deg) scale(1.01);
+  }
+  97% {
+    transform: rotate(0deg) scale(1);
   }
 }
 
@@ -1895,6 +1915,35 @@ body.has-modal .scene-glow {
 
 .story-section--dark h2 {
   max-width: 26ch;
+}
+
+/* Full-bleed PDF slide images in case studies */
+.case-slide-figure {
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+
+.case-slide-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* HMW blockquote */
+.hmw-quote {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.4vw, 1.85rem);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.35;
+  text-align: center;
+  color: var(--ink);
+  max-width: 38ch;
+  margin-inline: auto;
+  border: none;
 }
 
 .system-flow {

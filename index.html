@@ -326,13 +326,12 @@
     <article class="case-study case-study--fridge" data-case-title="FridgeMate">
       <header class="case-hero">
         <div class="case-hero__copy">
-          <p class="eyebrow">Product + UX · Phygital concept</p>
+          <p class="eyebrow">Product + UX · Phygital concept · June 2024</p>
           <h1>FridgeMate</h1>
-          <p class="case-hero__lead">What if a shared fridge could remember what its users forget—without asking them to
-            log every move?</p>
+          <p class="case-hero__lead">Making Forgotten Food Visible Before It Becomes Waste</p>
           <div class="case-meta">
             <span><b>Role</b> Research, concept, interaction</span>
-            <span><b>Audience</b> Students & shared homes</span>
+            <span><b>Audience</b> Students &amp; shared homes</span>
             <span><b>Focus</b> Food inventory visibility</span>
           </div>
         </div>
@@ -350,193 +349,160 @@
       </header>
 
       <nav class="story-nav" aria-label="FridgeMate case study sections">
-        <button type="button" data-jump="fridge-origin">Origin</button>
+        <button type="button" data-jump="fridge-overview">Overview</button>
+        <button type="button" data-jump="fridge-observation">Observation</button>
         <button type="button" data-jump="fridge-research">Research</button>
-        <button type="button" data-jump="fridge-pivots">Pivots</button>
-        <button type="button" data-jump="fridge-system">System</button>
-        <button type="button" data-jump="fridge-reflection">Reflection</button>
+        <button type="button" data-jump="fridge-insights">Insights</button>
+        <button type="button" data-jump="fridge-ideation">Ideation</button>
+        <button type="button" data-jump="fridge-pivot">Pivot</button>
+        <button type="button" data-jump="fridge-solution">Solution</button>
+        <button type="button" data-jump="fridge-features">Features</button>
       </nav>
 
-      <section class="story-section story-section--split" id="fridge-origin">
+      <!-- Slide 1 — Overview -->
+      <section class="story-section story-section--split" id="fridge-overview">
         <div>
-          <p class="section-number">01 · The trigger</p>
-          <h2>The fridge had become an “electric almirah.”</h2>
+          <p class="section-number">what it is</p>
+          <h2>Overview</h2>
         </div>
         <div class="story-copy">
-          <p>I shared a refrigerator with three flatmates. Our schedules, preferences and shopping habits were all
-            different. One weekend, while deciding what to eat, we found expired packs, soft vegetables and cooked food
-            hidden behind newer items.</p>
-          <p>The issue was not carelessness. Once the door closed, the contents disappeared from everyone’s working
-            memory. That observation reframed food waste as a visibility and coordination problem.</p>
-          <blockquote>People intended to use the food. They simply could not see, remember or coordinate it at the right
-            moment.</blockquote>
+          <p>FridgeMate is a phygital refrigerator companion designed to make fridge inventory easier to track and manage. It combines camera-assisted inventory tracking with a refrigerator-mounted interface to keep users informed about what food is stored, how long it has been there, and which items may need attention — reducing the need to rely on memory or manually maintain an inventory.</p>
         </div>
       </section>
 
+      <figure class="case-slide-figure">
+        <img src="assets/fridgemate/slide-01.png" alt="FridgeMate overview slide showing the product concept" loading="lazy">
+      </figure>
+
+      <!-- Slide 2 — Observation -->
+      <section class="story-section story-section--split" id="fridge-observation">
+        <div>
+          <p class="section-number">How it started</p>
+          <h2>Observation</h2>
+        </div>
+        <div class="story-copy">
+          <p>One Friday evening, while deciding what to cook, I opened the fridge and found spoiled tomatoes, overripe fruits and leftovers we had completely forgotten about. Together, it was roughly ₹200–₹300 worth of food — not wasted because we didn't want it, but because we had simply lost track of it.</p>
+          <p>That was when I realized our refrigerator had become an "electric almirah" — good at storing food, but not at helping us remember what was inside.</p>
+          <blockquote>Food can remain unnoticed in the refrigerator until it has already spoiled, with users often realizing it only when they encounter the item again. — hypothesis</blockquote>
+        </div>
+      </section>
+
+      <figure class="case-slide-figure">
+        <img src="assets/fridgemate/slide-02.png" alt="Observation slide with the fridge hypothesis" loading="lazy">
+      </figure>
+
+      <!-- Slide 3 — Research -->
       <section class="story-section story-section--tint" id="fridge-research">
-        <p class="section-number">02 · From observation to question</p>
-        <h2>How might a busy shared household know what is inside, how long it has been there, and what to use first?
-        </h2>
-        <div class="research-grid">
-          <article>
-            <span class="research-icon">⌕</span>
-            <h3>Desk research</h3>
-            <p>I reviewed reports and articles on household food waste to understand its scale and the role of
-              refrigerator management.</p>
-          </article>
-          <article>
-            <span class="research-icon">◌</span>
-            <h3>People</h3>
-            <p>Surveys and conversations with students, bachelors and working professionals explored shopping, storage
-              and leftover habits.</p>
-          </article>
-          <article>
-            <span class="research-icon">◉</span>
-            <h3>Behaviour</h3>
-            <p>Observing real fridges revealed a repeated pattern: newer food moved forward, older food became visually
-              and mentally buried.</p>
-          </article>
+        <p class="section-number">how it is going</p>
+        <h2>Research</h2>
+        <div class="story-copy">
+          <p>To understand whether my initial observation reflected a wider problem, I explored household and fridge food waste through secondary research, surveys, and user interviews. The research helped establish the scale of the problem and understand how commonly stored food ends up being overlooked or wasted in everyday fridge use.</p>
         </div>
         <div class="insight-strip">
-          <div><b>01</b><span>People relied on memory instead of a shared system.</span></div>
-          <div><b>02</b><span>Over-purchasing started when inventory was unclear.</span></div>
-          <div><b>03</b><span>Manual entry would become another chore.</span></div>
-        </div>
-        <p class="method-note">The coursework material documented the methods and directional patterns, but not
-          participant counts. This case study therefore treats the findings as qualitative inputs rather than
-          statistical proof.</p>
-      </section>
-
-      <section class="story-section" id="fridge-pivots">
-        <p class="section-number">03 · The concept got sharper through critique</p>
-        <h2>Three questions changed the product.</h2>
-        <div class="pivot-list">
-          <article class="pivot-card">
-            <span class="pivot-card__step">Faculty discussion 01</span>
-            <h3>How does the inventory know when food leaves?</h3>
-            <div class="before-after">
-              <div><b>Before</b>
-                <p>Users scanned or manually added food, but removal was not reflected.</p>
-              </div>
-              <span aria-hidden="true">→</span>
-              <div><b>Decision</b>
-                <p>Use wide-angle shelf cameras and change detection to observe both additions and removals.</p>
-              </div>
-            </div>
-          </article>
-          <article class="pivot-card">
-            <span class="pivot-card__step">Faculty discussion 02</span>
-            <h3>What can the prototype promise reliably?</h3>
-            <div class="before-after">
-              <div><b>Before</b>
-                <p>A gas sensor attempted to declare whether food had spoiled.</p>
-              </div>
-              <span aria-hidden="true">→</span>
-              <div><b>Decision</b>
-                <p>Narrow the promise: show what is stored and how long it has been there. The user remains in control
-                  of the final judgement.</p>
-              </div>
-            </div>
-          </article>
-          <article class="pivot-card">
-            <span class="pivot-card__step">Faculty discussion 03</span>
-            <h3>What if the barcode faces down?</h3>
-            <div class="before-after">
-              <div><b>Constraint</b>
-                <p>Camera placement cannot guarantee a clean barcode view.</p>
-              </div>
-              <span aria-hidden="true">→</span>
-              <div><b>Decision</b>
-                <p>Recognise packaging, brand or product name with image recognition, then ask for confirmation when
-                  confidence is low.</p>
-              </div>
-            </div>
-          </article>
+          <div><b>68M+</b><span>tonnes of food waste comes from Indian households annually</span></div>
+          <div><b>64%</b><span>linked to food stored/managed in refrigerators</span></div>
+          <div><b>58%</b><span>throws spoiled food from fridge</span></div>
         </div>
       </section>
 
-      <section class="story-section story-section--dark" id="fridge-system">
-        <p class="section-number">04 · Final concept</p>
-        <h2>Automatic sensing outside the moment of use. Clear information at the moment of choice.</h2>
-        <div class="system-flow" role="img"
-          aria-label="Fridge door opens, cameras capture shelf changes, image recognition identifies an item, inventory updates with a timestamp, and the display prioritises older items">
-          <div><span>01</span><b>Door opens</b><small>Reed switch wakes the system</small></div>
-          <i>→</i>
-          <div><span>02</span><b>See change</b><small>Shelf cameras compare states</small></div>
-          <i>→</i>
-          <div><span>03</span><b>Recognise</b><small>Product image or label</small></div>
-          <i>→</i>
-          <div><span>04</span><b>Update</b><small>Add, remove and timestamp</small></div>
-          <i>→</i>
-          <div><span>05</span><b>Prioritise</b><small>Older items surface first</small></div>
+      <!-- Slide 4 — Key Insights -->
+      <section class="story-section" id="fridge-insights">
+        <p class="section-number">what i found</p>
+        <h2>Key Insights</h2>
+        <div class="story-copy">
+          <p>After completing the research, I analyzed the survey data and interview responses to identify recurring patterns in how users manage food inside their refrigerators. Synthesizing these findings revealed four key insights that captured the recurring gaps in visibility, awareness, and everyday tracking of stored food.</p>
         </div>
-        <div class="system-columns">
-          <div>
-            <h3>Prototype architecture</h3>
-            <ul class="clean-list">
-              <li><b>ESP32-CAM + wide-angle lens</b><span>Captures shelf states</span></li>
-              <li><b>Arduino Nano</b><span>Coordinates sensors and logic</span></li>
-              <li><b>Magnetic reed + IR break beam</b><span>Detects door and movement events</span></li>
-              <li><b>7-inch TFT display</b><span>Makes inventory visible on the door</span></li>
-              <li><b>MicroSD storage</b><span>Keeps local inventory records</span></li>
-            </ul>
-          </div>
-          <div>
-            <h3>What the interface prioritises</h3>
-            <div class="priority-list">
-              <p><span class="priority-dot priority-dot--red"></span><b>Use today</b>Time-sensitive item</p>
-              <p><span class="priority-dot priority-dot--gold"></span><b>Use next</b>Older than nearby items</p>
-              <p><span class="priority-dot priority-dot--green"></span><b>Recently added</b>Available, no urgency</p>
-            </div>
-          </div>
+        <div class="insight-strip">
+          <div><b>01</b><span>Lack of visibility and awareness</span></div>
+          <div><b>02</b><span>Users often forget what is already inside the fridge</span></div>
+          <div><b>03</b><span>Users forget when the food was stored</span></div>
+          <div><b>04</b><span>Spoilage is often noticed only after obvious signs appear</span></div>
         </div>
       </section>
 
-      <section class="story-section">
-        <p class="section-number">05 · Everyday journey</p>
-        <h2>The useful moment is before buying or cooking—not after food is lost.</h2>
-        <ol class="journey-steps">
-          <li><span>01</span>
-            <div><b>Store naturally</b>
-              <p>Place an item in the fridge; no scanning ritual is required.</p>
-            </div>
-          </li>
-          <li><span>02</span>
-            <div><b>Confirm only if needed</b>
-              <p>A low-confidence recognition can be corrected on the display.</p>
-            </div>
-          </li>
-          <li><span>03</span>
-            <div><b>Glance before deciding</b>
-              <p>The door display shows inventory ordered by urgency.</p>
-            </div>
-          </li>
-          <li><span>04</span>
-            <div><b>Use or remove</b>
-              <p>Taking the item out updates the shared inventory.</p>
-            </div>
-          </li>
-        </ol>
+      <!-- HMW -->
+      <section class="story-section story-section--tint">
+        <blockquote class="hmw-quote">How might we make it easier for users to keep track of food in their fridge before it is forgotten or goes bad?</blockquote>
       </section>
 
-      <section class="story-section story-section--split" id="fridge-reflection">
+      <figure class="case-slide-figure">
+        <img src="assets/fridgemate/slide-05.png" alt="How might we statement slide" loading="lazy">
+      </figure>
+
+      <!-- Slide 6 — Concept 01 -->
+      <section class="story-section story-section--split" id="fridge-ideation">
         <div>
-          <p class="section-number">06 · Reflection</p>
-          <h2>The strongest improvement was not a feature. It was a smaller, more honest promise.</h2>
+          <p class="section-number">ideation</p>
+          <h2>Concept 01 — Food Spoilage Detection</h2>
         </div>
         <div class="story-copy">
-          <p>FridgeMate began as a broad smart-fridge assistant with scanning, spoilage sensing and recipe suggestions.
-            Critique exposed the burden and uncertainty inside that scope.</p>
-          <p>The refined concept focuses on one defensible job: maintain a shared picture of what is in the fridge and
-            when it arrived. That visibility can reduce duplicate buying and forgotten food while leaving food-safety
-            judgement with the person.</p>
-          <div class="next-box">
-            <h3>Next validation</h3>
-            <p>Prototype camera occlusion, multi-item movement and recognition confidence; then test whether the display
-              changes real use-first behaviour over several weeks in shared homes.</p>
-          </div>
+          <p>The first concept explored a detection-first approach — a system that attempted to identify food spoilage through sensors and manual logging.</p>
         </div>
       </section>
+
+      <figure class="case-slide-figure">
+        <img src="assets/fridgemate/slide-06.png" alt="Concept 01 ideation slide showing food spoilage detection approach" loading="lazy">
+      </figure>
+
+      <!-- Slide 7 — Limitations -->
+      <section class="story-section" id="fridge-pivot">
+        <p class="section-number">why it failed</p>
+        <h2>Limitations</h2>
+        <div class="story-copy">
+          <p>Evaluating the first concept revealed several gaps in both the user experience and system feasibility. These limitations showed that the solution was adding effort while still leaving critical gaps in how food was tracked and spoilage was detected.</p>
+        </div>
+        <div class="insight-strip">
+          <div><b>①</b><span>Too much manual effort</span></div>
+          <div><b>②</b><span>The inventory loop was incomplete</span></div>
+          <div><b>③</b><span>Spoilage detection was difficult to attribute</span></div>
+          <div><b>④</b><span>The solution intervened too late</span></div>
+        </div>
+      </section>
+
+      <!-- Slide 8 — Pivot -->
+      <section class="story-section story-section--tint">
+        <p class="section-number">what i changed</p>
+        <h2>Shifting the approach</h2>
+        <div class="story-copy">
+          <p>The limitations of the first concept changed how I approached the solution. Rather than building a system that depended on users to manually log food and then waited for signs of spoilage, I shifted toward maintaining an automatic record of what was inside the fridge and how long it had been there.</p>
+        </div>
+      </section>
+
+      <!-- Slide 9 — Concept 02 -->
+      <section class="story-section story-section--dark" id="fridge-solution">
+        <p class="section-number">what i designed</p>
+        <h2>Concept 02 — FridgeMate</h2>
+        <p class="case-hero__lead">A passive fridge inventory companion</p>
+      </section>
+
+      <figure class="case-slide-figure">
+        <img src="assets/fridgemate/slide-09.png" alt="FridgeMate concept 02 slide showing the passive fridge companion" loading="lazy">
+      </figure>
+
+      <!-- Slide 10 — Key Features -->
+      <section class="story-section" id="fridge-features">
+        <p class="section-number">what it does</p>
+        <h2>Key Features</h2>
+        <div class="story-copy">
+          <p>After identifying the gaps in the initial concept and revisiting the key insights from the research, the solution was refined into FridgeMate. The revised concept integrates features that directly respond to the user problems uncovered during the process.</p>
+        </div>
+        <div class="insight-strip">
+          <div><b>🔍</b><span>Automatic Inventory Tracking</span></div>
+          <div><b>⏱</b><span>Storage-Time Tracking</span></div>
+          <div><b>👁</b><span>Inventory Visibility</span></div>
+          <div><b>🎯</b><span>Predictive Attention</span></div>
+          <div><b>🔔</b><span>Timely Alerts</span></div>
+        </div>
+      </section>
+
+      <!-- Final visuals -->
+      <figure class="case-slide-figure">
+        <img src="assets/fridgemate/slide-10.png" alt="Key features detail slide" loading="lazy">
+      </figure>
+
+      <figure class="case-slide-figure">
+        <img src="assets/fridgemate/slide-11.png" alt="FridgeMate final product visuals and mockups" loading="lazy">
+      </figure>
     </article>
   </template>
 
