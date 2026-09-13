@@ -897,6 +897,14 @@ body.has-modal .scene-glow {
   place-items: center;
   border-radius: 13px;
   background: #e1c295;
+  overflow: hidden;
+}
+
+.project-choice__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
 }
 
 .project-choice__visual--gatha {
@@ -1583,111 +1591,15 @@ body.has-modal .scene-glow {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 340px;
+  min-height: 280px;
 }
 
-.fridge-body {
-  position: relative;
-  display: grid;
-  width: 240px;
-  height: 330px;
-  grid-template-rows: 1fr 1fr 1fr;
-  padding: 26px 20px;
-  border: 7px solid #d8b98e;
-  border-radius: 20px;
-  background: #fff9e9;
-  box-shadow: 24px 25px 0 rgba(38, 17, 9, .18);
-}
-
-.fridge-body i {
-  border-bottom: 2px solid #dbc6a4;
-}
-
-.fridge-body::after {
-  position: absolute;
-  right: 18px;
-  top: 140px;
-  width: 6px;
-  height: 43px;
-  border-radius: 5px;
-  background: #6d4c37;
-  content: "";
-}
-
-.fridge-camera {
-  position: absolute;
-  top: 12px;
-  left: 50%;
-  color: #6a3322;
-  font-size: .8rem;
-  transform: translateX(-50%);
-}
-
-.fridge-screen {
-  position: absolute;
-  z-index: 2;
-  top: 72px;
-  left: -14px;
-  width: 225px;
-  min-height: 235px;
-  padding: 17px;
-  color: var(--ink);
-  border: 5px solid #3f3128;
+.fridge-hero-img {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
   border-radius: 16px;
-  background: #f8efd9;
-  box-shadow: 9px 11px 24px rgba(38, 17, 9, .28);
-  transform: rotate(-3deg);
-}
-
-.screen-top {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 12px;
-  font-size: .64rem;
-}
-
-.food-row {
-  display: grid;
-  grid-template-columns: 10px 1fr auto;
-  gap: 8px;
-  align-items: center;
-  padding: 10px 0;
-  border-top: 1px solid rgba(57, 38, 27, .12);
-  font-size: .7rem;
-}
-
-.food-row time {
-  color: #77604e;
-  font-size: .6rem;
-}
-
-.food-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-}
-
-.food-dot--green {
-  background: #64844d;
-}
-
-.food-dot--gold {
-  background: #d59a2c;
-}
-
-.food-dot--red {
-  background: #b34c34;
-}
-
-.screen-note {
-  margin-top: 10px;
-  padding: 9px;
-  color: #fff9e9;
-  border-radius: 8px;
-  background: #6b3322;
-  text-align: center;
-  font-family: var(--font-display);
-  font-size: .7rem;
+  box-shadow: 0 16px 48px rgba(38, 17, 9, .25);
 }
 
 .case-hero--image {
@@ -2711,8 +2623,11 @@ body.has-modal .scene-glow {
   }
 
   .fridge-hero-visual {
-    min-height: 290px;
-    transform: scale(.8);
+    min-height: auto;
+  }
+
+  .fridge-hero-img {
+    max-height: 300px;
   }
 
   .case-hero--image {
