@@ -289,28 +289,50 @@ a:focus-visible,
   transform: translate(-50%, 0) rotate(-1.5deg);
 }
 
-/* Pulsing glow ring — a warm golden aura that radiates outward every 3s.
-   Also briefly peeks the label so users discover it without hovering. */
+/* Pulsing glow ring + wiggle shake in one 3s cycle.
+   0-50%  = idle rest
+   50-70% = glow pulse (box-shadow radiates out)
+   72-92% = wiggle shake (rotate + translate)
+   92-100% = settle back */
 @keyframes hotspot-pulse {
   0%, 50% {
     box-shadow: 0 0 0 0 rgba(255, 210, 80, 0);
     border-color: rgba(255, 210, 80, .3);
+    transform: translate(0, 0) rotate(0deg);
   }
-  65% {
+  60% {
     box-shadow:
-      0 0 0 6px rgba(255, 215, 100, .2),
+      0 0 0 6px rgba(255, 215, 100, .22),
       0 0 20px rgba(255, 200, 80, .15);
     border-color: rgba(255, 220, 100, .7);
+    transform: translate(0, 0) rotate(0deg);
   }
-  80% {
+  70% {
     box-shadow:
       0 0 0 10px rgba(255, 215, 100, 0),
       0 0 30px rgba(255, 200, 80, .08);
     border-color: rgba(255, 210, 80, .5);
+    transform: translate(0, 0) rotate(0deg);
+  }
+  76% {
+    transform: translate(-1.5px, -1px) rotate(-2deg);
+  }
+  80% {
+    transform: translate(1.5px, 0.5px) rotate(2deg);
+  }
+  84% {
+    transform: translate(-1px, 0.5px) rotate(-1.5deg);
+  }
+  88% {
+    transform: translate(1px, -0.5px) rotate(1deg);
+  }
+  92% {
+    transform: translate(-0.5px, 0) rotate(-0.5deg);
   }
   100% {
     box-shadow: 0 0 0 0 rgba(255, 210, 80, 0);
     border-color: rgba(255, 210, 80, .3);
+    transform: translate(0, 0) rotate(0deg);
   }
 }
 
