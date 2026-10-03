@@ -1152,47 +1152,59 @@ body.has-modal .scene-glow {
 .resume-shell {
   width: min(1120px, 95vw);
   height: min(800px, 92svh);
-  display: grid;
-  grid-template-columns: minmax(310px, .82fr) minmax(0, 1.35fr);
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #6e3925;
+  display: flex;
+  flex-direction: column;
 }
 
 .resume-close {
   position: absolute;
   top: 17px;
   right: 17px;
-  z-index: 3;
+  z-index: 10;
+}
+
+.resume-body {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: grid;
+  grid-template-columns: minmax(310px, .82fr) minmax(0, 1.35fr);
+  align-items: stretch;
+  scrollbar-width: thin;
+  scrollbar-color: #bd9470 transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.resume-body::-webkit-scrollbar {
+  width: 7px;
+}
+
+.resume-body::-webkit-scrollbar-track {
+  background: #fffdf6;
+}
+
+.resume-body::-webkit-scrollbar-thumb {
+  background: #bd9470;
+  border-radius: 6px;
+}
+
+.resume-body::-webkit-scrollbar-thumb:hover {
+  background: #a37b58;
 }
 
 .profile-panel {
-  min-height: 0;
-  max-height: 100%;
   display: flex;
   flex-direction: column;
   padding: 32px;
   color: #fff8e9;
   background: #6e3925;
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 248, 233, .35) transparent;
-  -webkit-overflow-scrolling: touch;
-}
-
-.profile-panel::-webkit-scrollbar {
-  width: 6px;
-}
-
-.profile-panel::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.profile-panel::-webkit-scrollbar-thumb {
-  background: rgba(255, 248, 233, .3);
-  border-radius: 6px;
-}
-
-.profile-panel::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 248, 233, .5);
+  overflow: visible;
+  height: 100%;
 }
 
 .profile-panel > * {
@@ -1286,12 +1298,9 @@ body.has-modal .scene-glow {
 }
 
 .resume-paper {
-  min-height: 0;
-  max-height: 100%;
-  overflow-y: auto;
+  overflow: visible;
   padding: 42px 54px 54px 44px;
   background: #fffdf6;
-  scrollbar-color: #bd9470 transparent;
 }
 
 .resume-section {
@@ -3306,7 +3315,7 @@ body.has-modal .scene-glow {
     min-height: 360px;
   }
 
-  .resume-shell {
+  .resume-body {
     grid-template-columns: .82fr 1.18fr;
   }
 
@@ -3498,11 +3507,17 @@ body.has-modal .scene-glow {
     width: 96vw;
     height: 92svh;
     display: block;
+    overflow: hidden;
+  }
+
+  .resume-body {
+    display: block;
+    height: 100%;
     overflow-y: auto;
   }
 
   .profile-panel {
-    min-height: 670px;
+    min-height: auto;
     overflow: visible;
   }
 
