@@ -314,6 +314,31 @@ document.addEventListener("click", (event) => {
 
 
   /* ================================
+     JUMP TO CASE SECTION
+     ================================ */
+
+  const jumpButton =
+    event.target.closest("[data-jump]");
+
+  if (jumpButton) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
+    const targetId = jumpButton.dataset.jump;
+    const targetEl = caseScroll.querySelector(`#${targetId}`);
+
+    if (targetEl) {
+      targetEl.scrollIntoView({
+        behavior: reducedMotion.matches ? "auto" : "smooth",
+        block: "start"
+      });
+    }
+
+    return;
+  }
+
+
+  /* ================================
      GALLERY PREVIOUS
      ================================ */
 
@@ -676,4 +701,28 @@ Object.values(galleries).flatMap((gallery) => gallery.items).forEach((item) => {
     wb.classList.remove("has-drawn");
   });
 })();
-/* ── End whiteboard ── */
+/* ── Deep linking via URL hash ── */
+function checkHashRoute() {
+  const rawHash = window.location.hash.toLowerCase().replace("#", "").trim();
+  if (!rawHash) return;
+  const [target, subSection] = rawHash.split(":");
+  if (target === "resume") {
+    openDialog(dialogs.resume);
+  } else if (target === "gatha" || target === "fridgemate") {
+    openCaseStudy(target);
+    if (subSection) {
+      const el = caseScroll.querySelector(`#${subSection}`);
+      if (el) {
+        el.scrollIntoView({ behavior: "auto", block: "start" });
+      }
+    }
+  } else if (target === "projects" || target === "ux") {
+    openDialog(dialogs.ux);
+  } else if (target === "graphic" || target === "photography") {
+    openGallery(target);
+  }
+}
+
+window.addEventListener("DOMContentLoaded", checkHashRoute);
+window.addEventListener("hashchange", checkHashRoute);
+checkHashRoute();
