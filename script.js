@@ -124,11 +124,29 @@ function openDialog(dialog) {
   /* Open the requested dialog */
   if (!dialog.open) {
     dialog.showModal();
+    if (dialog === dialogs.resume) {
+      requestAnimationFrame(updateResumeSticky);
+      setTimeout(updateResumeSticky, 80);
+    }
   }
 
   /* Pause background animations for performance */
   document.body.classList.add("has-modal");
 }
+
+function updateResumeSticky() {
+  const resumeBody = document.querySelector(".resume-body");
+  const profilePanel = document.querySelector(".profile-panel");
+  if (!resumeBody || !profilePanel) return;
+  if (window.innerWidth <= 840) {
+    profilePanel.style.top = "";
+    return;
+  }
+  const diff = resumeBody.clientHeight - profilePanel.offsetHeight;
+  profilePanel.style.top = `${Math.min(0, diff)}px`;
+}
+
+window.addEventListener("resize", updateResumeSticky);
 
 function closeDialog(dialog) {
   if (dialog?.open) dialog.close();

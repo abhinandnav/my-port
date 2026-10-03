@@ -1155,7 +1155,7 @@ body.has-modal .scene-glow {
   position: relative;
   overflow: hidden;
   border-radius: 24px;
-  background: #6e3925;
+  background: #fffdf6;
   display: flex;
   flex-direction: column;
 }
@@ -1204,7 +1204,10 @@ body.has-modal .scene-glow {
   color: #fff8e9;
   background: #6e3925;
   overflow: visible;
-  height: 100%;
+  position: sticky;
+  align-self: start;
+  top: 0;
+  border-radius: 24px 0 0 24px;
 }
 
 .profile-panel > * {
@@ -1710,31 +1713,44 @@ body.has-modal .scene-glow {
   font-size: .7rem;
 }
 
-.case-hero--image {
+.case-hero--gatha {
+  background: #522116;
+  grid-template-columns: minmax(0, 1.15fr) minmax(360px, .95fr);
+}
+
+.gatha-hero-visual {
   position: relative;
   display: flex;
-  min-height: 600px;
-  align-items: flex-end;
-  overflow: hidden;
-  background: #2a170f;
-}
-
-.case-hero--image>img {
-  position: absolute;
-  inset: 0;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 100%;
+}
+
+.gatha-hero-figure {
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, .2);
+  box-shadow: 0 20px 48px rgba(18, 9, 5, .45);
+  background: #180c06;
+}
+
+.gatha-hero-figure img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
   object-fit: cover;
+  display: block;
 }
 
-.case-hero__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(24, 12, 6, .92) 0%, rgba(40, 19, 9, .66) 45%, rgba(26, 12, 6, .1) 78%), linear-gradient(0deg, rgba(20, 9, 4, .72), transparent 54%);
-}
-
-.case-hero--image .case-hero__copy {
-  max-width: 690px;
+.gatha-hero-figure figcaption {
+  padding: 10px 14px;
+  font-size: .72rem;
+  color: rgba(255, 248, 233, .75);
+  background: rgba(24, 12, 6, .85);
+  border-top: 1px solid rgba(255, 255, 255, .1);
+  letter-spacing: .02em;
 }
 
 .story-nav {
@@ -3519,6 +3535,8 @@ body.has-modal .scene-glow {
   .profile-panel {
     min-height: auto;
     overflow: visible;
+    position: static;
+    border-radius: 24px 24px 0 0;
   }
 
   .profile-photo-wrap {
@@ -3566,14 +3584,7 @@ body.has-modal .scene-glow {
     transform: scale(.8);
   }
 
-  .case-hero--image {
-    min-height: 650px;
-    align-items: flex-end;
-  }
 
-  .case-hero__overlay {
-    background: linear-gradient(0deg, rgba(24, 12, 6, .93) 0%, rgba(35, 17, 8, .62) 65%, rgba(26, 12, 6, .18));
-  }
 
   .story-nav {
     justify-content: flex-start;
